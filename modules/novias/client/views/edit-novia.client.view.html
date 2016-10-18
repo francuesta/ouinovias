@@ -1,0 +1,46 @@
+<section ng-controller="NoviasController" ng-init="findOne()">
+  <div class="page-header">
+    <h1>Editar novia</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="noviaForm" class="form-horizontal" ng-submit="update(noviaForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="name">Nombre</label>
+          <input name="name" type="text" ng-model="novia.name" id="name" class="form-control" placeholder="Nombre" required>
+          <div ng-messages="noviaForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El nombre es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="surname">Apellidos</label>
+          <input name="surname" type="text" ng-model="novia.surname" id="surname" class="form-control" placeholder="Apellidos" required>
+          <div ng-messages="noviaForm.surname.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El apellido es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="phone">Teléfono</label>
+          <input name="phone" type="phone" ng-model="novia.phone" id="phone" class="form-control" placeholder="Teléfono" required>
+          <div ng-messages="noviaForm.phone.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El teléfono es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="testDate">Fecha de la prueba</label>
+          <input name="testDate" type="date" ng-model="novia.testDate" id="testDate" class="form-control" placeholder="Fecha de la prueba">
+        </div>
+        <div class="form-group">
+          <label for="testComments">Comentarios de la prueba</label>
+          <textarea name="testComments" ng-model="novia.testComments" id="testComments" class="form-control" cols="30" rows="10" placeholder="Comentarios de la prueba"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Update" class="btn btn-default">
+        </div>
+        <div ng-show="error" class="text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,95 @@
+<section ng-controller="NoviasController">
+  <div class="page-header">
+    <h1>Alta de novia</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="noviaForm" class="form-horizontal" ng-submit="create(noviaForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="name">Nombre</label>
+          <input name="name" type="text" ng-model="name" id="name" class="form-control" placeholder="Nombre" required>
+          <div ng-messages="noviaForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El nombre es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="surname">Apellidos</label>
+          <input name="surname" type="text" ng-model="surname" id="surname" class="form-control" placeholder="Apellidos" required>
+          <div ng-messages="noviaForm.surname.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El apellido es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="phone">Teléfono</label>
+          <input name="phone" type="phone" ng-model="phone" id="phone" class="form-control" placeholder="Teléfono" required>
+          <div ng-messages="noviaForm.phone.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El teléfono es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="weddingDate">Fecha de la boda</label>
+          <input name="weddingDate" type="date" ng-model="weddingDate" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required>
+          <div ng-messages="noviaForm.weddingDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">La fecha de la boda es obligatoria.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="weddingHour">Hora de la boda</label>
+          <input name="weddingHour" type="text" ng-model="weddingHour" id="weddingHour" class="form-control" placeholder="Hora de la boda" required>
+          <div ng-messages="noviaForm.weddingHour.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">La hora de la boda es obligatoria.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="weddingPlace">Lugar de la boda</label>
+          <input name="weddingPlace" type="text" ng-model="weddingPlace" id="weddingPlace" class="form-control" placeholder="Lugar de la boda" required>
+          <div ng-messages="noviaForm.weddingPlace.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El lugar de la boda es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="weddingComments">Comentarios de la boda</label>
+          <textarea name="weddingComments" ng-model="weddingComments" id="weddingComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la boda"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="howKnowUs">¿Cómo nos conociste?</label>
+          <select name="howKnowUs" type="select" ng-model="howKnowUs" id="howKnowUs" class="form-control" required>
+            <option value="bodasnet">Bodas.net</option>
+            <option value="ouinoviascom">Ouinovias.com</option>
+            <option value="conocido">Conocido</option>
+          </select>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="facebookUser">Usuario de facebook</label>
+          <input name="facebookUser" type="text" ng-model="facebookUser" id="facebookUser" class="form-control" placeholder="Usuario de facebook">
+        </div>
+        <div class="form-group" show-errors>
+          <label for="instagramUser">Usuario de instagram</label>
+          <input name="instagramUser" type="text" ng-model="instagramUser" id="instagramUser" class="form-control" placeholder="Usuario de instagram">
+        </div>
+        <div class="form-group" show-errors>
+          <label for="testDate">Fecha de la prueba</label>
+          <input name="testDate" type="date" ng-model="testDate" id="testDate" class="form-control" placeholder="Fecha de la prueba">
+        </div>
+        <div class="form-group" show-errors>
+          <label for="testHour">Hora de la prueba</label>
+          <input name="testHour" type="text" ng-model="testHour" id="testHour" class="form-control" placeholder="Hora de la prueba">
+        </div>
+        <div class="form-group" show-errors>
+          <label for="testPlace">Lugar de la prueba</label>
+          <input name="testPlace" type="text" ng-model="testPlace" id="testPlace" class="form-control" placeholder="Lugar de la prueba">
+        </div>
+        <div class="form-group">
+          <label for="testComments">Comentarios de la prueba</label>
+          <textarea name="testComments" ng-model="testComments" id="testComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la prueba"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-default">
+        </div>
+        <div ng-show="error" class="text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

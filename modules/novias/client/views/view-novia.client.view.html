@@ -1,6 +1,6 @@
 <section ng-controller="NoviasController" ng-init="findOne()">
   <div class="page-header">
-    <h1 ng-bind="novia.name"></h1><h1 ng-bind="novia.surname"></h1>
+    <h1><span ng-bind="novia.name"></span> <span ng-bind="novia.surname"></span></h1>
   </div>
   <div class="pull-right" ng-show="authentication.user._id == novia.user._id">
     <a class="btn btn-primary" ui-sref="novias.edit({noviaId: novia._id})">
@@ -10,13 +10,67 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="novia.created | date:'mediumDate'"></span>
-      by
-      <span ng-bind="novia.user.displayName"></span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="novia.phone"></p>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>Teléfono</strong></div>
+        <div class="col-md-6" ng-bind="novia.phone"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Fecha de la boda</strong></div>
+        <div class="col-md-6" ng-bind="novia.weddingDate | date"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Hora de la boda</strong></div>
+        <div class="col-md-6" ng-bind="novia.weddingHour"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Lugar de la boda</strong></div>
+        <div class="col-md-6" ng-bind="novia.weddingPlace"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Comentarios de la boda</strong></div>
+        <div class="col-md-6" ng-bind="novia.weddingComments"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>¿Cómo nos conoció?</strong></div>
+        <div class="col-md-6" ng-bind="novia.howKnowUs"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Usuario de facebook</strong></div>
+        <div class="col-md-6" ng-bind="novia.facebookUser"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Usuario de instagram</strong></div>
+        <div class="col-md-6" ng-bind="novia.instagramUser"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Fecha de la prueba</strong></div>
+        <div class="col-md-6" ng-bind="novia.testDate | date"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Hora de la prueba</strong></div>
+        <div class="col-md-6" ng-bind="novia.testHour"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Lugar de la prueba</strong></div>
+        <div class="col-md-6" ng-bind="novia.testPlace"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Comentarios de la prueba</strong></div>
+        <div class="col-md-6" ng-bind="novia.testComments"></div>
+      </div>
+    </div>
+  </div>
 </section>

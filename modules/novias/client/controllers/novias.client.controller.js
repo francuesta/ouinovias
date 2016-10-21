@@ -97,7 +97,23 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
 
     // Find a list of Novias
     $scope.find = function () {
-      $scope.novias = Novias.query();
+      $scope.noviasFull = Novias.query();
+      $scope.novias = $scope.noviasFull;
+    };
+
+    // Filter a list of Novias
+    $scope.filter = function() {
+      var all = [];
+      // Loop over all
+      for (var i=0; i<$scope.noviasFull.length; i++) {
+        var name = $scope.noviasFull[i].name + ' ' + $scope.noviasFull[i].surname;
+        name = name.toUpperCase();
+        var toSearch = $scope.search.toUpperCase();
+        if ($scope.search === '' || name.indexOf(toSearch) !== -1) {
+          all.push($scope.noviasFull[i]);
+        }
+      }
+      $scope.novias = all;
     };
 
     // Find existing Novia

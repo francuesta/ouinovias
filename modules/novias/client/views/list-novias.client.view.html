@@ -1,6 +1,13 @@
 <section ng-controller="NoviasController" ng-init="find()">
   <div class="page-header">
-    <h1>Novias</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Novias</h1>
+      </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Buscar" ng-change="filter()" />
+      </div>
+    </div>
   </div>
   <div class="list-group">
     <a ng-repeat="novia in novias" ui-sref="novias.view({noviaId: novia._id})" class="list-group-item">

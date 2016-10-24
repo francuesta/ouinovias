@@ -118,6 +118,11 @@ ApplicationConfiguration.registerModule('novias');
 'use strict';
 
 // Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('profesionales');
+
+'use strict';
+
+// Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users', ['core']);
 ApplicationConfiguration.registerModule('users.admin', ['core.admin']);
 ApplicationConfiguration.registerModule('users.admin.routes', ['core.admin.routes']);
@@ -631,6 +636,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         name: this.name,
         surname: this.surname,
         phone: this.phone,
+        email: this.email,
         weddingDate: this.weddingDate,
         weddingHour: this.weddingHour,
         weddingPlace: this.weddingPlace,
@@ -652,6 +658,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.name = '';
         $scope.surname = '';
         $scope.phone = '';
+        $scope.email = '';
         $scope.weddingDate = '';
         $scope.weddingHour = '';
         $scope.weddingPlace = '';
@@ -741,6 +748,199 @@ angular.module('novias').factory('Novias', ['$resource',
   function ($resource) {
     return $resource('api/novias/:noviaId', {
       noviaId: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]);
+
+'use strict';
+
+// Configuring the Profesionales module
+angular.module('profesionales').run(['Menus',
+  function (Menus) {
+    // Add the profesionales dropdown item
+    Menus.addMenuItem('topbar', {
+      title: 'Profesionales',
+      state: 'profesionales',
+      type: 'dropdown',
+      roles: ['*']
+    });
+
+    // Add the dropdown list item
+    Menus.addSubMenuItem('topbar', 'profesionales', {
+      title: 'Listado',
+      state: 'profesionales.list'
+    });
+
+    // Add the dropdown create item
+    Menus.addSubMenuItem('topbar', 'profesionales', {
+      title: 'Alta',
+      state: 'profesionales.create',
+      roles: ['user']
+    });
+  }
+]);
+
+'use strict';
+
+// Setting up route
+angular.module('profesionales').config(['$stateProvider',
+  function ($stateProvider) {
+    // Profesionales state routing
+    $stateProvider
+      .state('profesionales', {
+        abstract: true,
+        url: '/profesionales',
+        template: '<ui-view/>'
+      })
+      .state('profesionales.list', {
+        url: '',
+        templateUrl: 'modules/profesionales/client/views/list-profesionales.client.view.html'
+      })
+      .state('profesionales.create', {
+        url: '/create',
+        templateUrl: 'modules/profesionales/client/views/create-profesional.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
+      .state('profesionales.view', {
+        url: '/:profesionalId',
+        templateUrl: 'modules/profesionales/client/views/view-profesional.client.view.html'
+      })
+      .state('profesionales.edit', {
+        url: '/:profesionalId/edit',
+        templateUrl: 'modules/profesionales/client/views/edit-profesional.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      });
+  }
+]);
+
+'use strict';
+
+// Profesionales controller
+angular.module('profesionales').controller('ProfesionalesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Profesionales',
+  function ($scope, $stateParams, $location, Authentication, Profesionales) {
+    $scope.authentication = Authentication;
+
+    // Create new Profesional
+    $scope.create = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'profesionalForm');
+
+        return false;
+      }
+
+      //TODO
+
+      // Create new Profesional object
+      var profesional = new Profesionales({
+        name: this.name,
+        surname: this.surname,
+        phone: this.phone,
+        email: this.email,
+        facebookUser: this.facebookUser,
+        instagramUser: this.instagramUser,
+        comments: this.comments
+      });
+
+      // Redirect after save
+      profesional.$save(function (response) {
+        $location.path('profesionales/' + response._id);
+
+        // Clear form fields
+        $scope.name = '';
+        $scope.surname = '';
+        $scope.phone = '';
+        $scope.email = '';
+        $scope.facebookUser = '';
+        $scope.instagramUser = '';
+        $scope.comments = '';
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Remove existing Profesional
+    $scope.remove = function (profesional) {
+      if (profesional) {
+        profesional.$remove();
+
+        for (var i in $scope.profesionales) {
+          if ($scope.profesionales[i] === profesional) {
+            $scope.profesionales.splice(i, 1);
+          }
+        }
+      } else {
+        $scope.profesional.$remove(function () {
+          $location.path('profesionales');
+        });
+      }
+    };
+
+    // Update existing Profesional
+    $scope.update = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'profesionalForm');
+
+        return false;
+      }
+
+      var profesional = $scope.profesional;
+
+      profesional.$update(function () {
+        $location.path('profesionales/' + profesional._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Find a list of Profesionales
+    $scope.find = function () {
+      $scope.profesionalesFull = Profesionales.query();
+      $scope.profesionales = $scope.profesionalesFull;
+    };
+
+    // Filter a list of Profesionales
+    $scope.filter = function() {
+      var all = [];
+      // Loop over all
+      for (var i=0; i<$scope.profesionalesFull.length; i++) {
+        var name = $scope.profesionalesFull[i].name + ' ' + $scope.profesionalesFull[i].surname;
+        name = name.toUpperCase();
+        var toSearch = $scope.search.toUpperCase();
+        if ($scope.search === '' || name.indexOf(toSearch) !== -1) {
+          all.push($scope.profesionalesFull[i]);
+        }
+      }
+      $scope.profesionales = all;
+    };
+
+    // Find existing Profesional
+    $scope.findOne = function () {
+      $scope.profesional = Profesionales.get({
+        profesionalId: $stateParams.profesionalId
+      });
+    };
+  }
+]);
+
+'use strict';
+
+//Profesionales service used for communicating with the profesionales REST endpoints
+angular.module('profesionales').factory('Profesionales', ['$resource',
+  function ($resource) {
+    return $resource('api/profesionales/:profesionalId', {
+      profesionalId: '@_id'
     }, {
       update: {
         method: 'PUT'

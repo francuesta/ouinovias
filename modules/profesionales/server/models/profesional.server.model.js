@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Novia Schema
+ * Profesional Schema
  */
-var NoviaSchema = new Schema({
+var ProfesionalSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -38,30 +38,6 @@ var NoviaSchema = new Schema({
     trim: true,
     required: 'Email es obligatorio'
   },
-  weddingDate: {
-    type: Date,
-    required: 'Fecha de la boda obligatoria'
-  },
-  weddingHour: {
-    type: String,
-    required: 'Hora de la boda obligatoria'
-  },
-  weddingPlace: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Lugar de la boda obligatorio'
-  },
-  weddingComments: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  howKnowUs: {
-    type: String,
-    default: '',
-    trim: true
-  },
   facebookUser: {
     type: String,
     default: '',
@@ -72,19 +48,7 @@ var NoviaSchema = new Schema({
     default: '',
     trim: true
   },
-  testDate: {
-    type: Date
-  },
-  testHour: {
-    type: String,
-    trim: true
-  },
-  testPlace: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  testComments: {
+  comments: {
     type: String,
     default: '',
     trim: true
@@ -95,6 +59,4 @@ var NoviaSchema = new Schema({
   }
 });
 
-
-
-mongoose.model('Novia', NoviaSchema);
+mongoose.model('Profesional', ProfesionalSchema);

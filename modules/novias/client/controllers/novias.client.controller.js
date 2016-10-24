@@ -22,6 +22,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         name: this.name,
         surname: this.surname,
         phone: this.phone,
+        email: this.email,
         weddingDate: this.weddingDate,
         weddingHour: this.weddingHour,
         weddingPlace: this.weddingPlace,
@@ -43,6 +44,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.name = '';
         $scope.surname = '';
         $scope.phone = '';
+        $scope.email = '';
         $scope.weddingDate = '';
         $scope.weddingHour = '';
         $scope.weddingPlace = '';

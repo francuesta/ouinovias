@@ -27,6 +27,13 @@
           </div>
         </div>
         <div class="form-group" show-errors>
+          <label for="email">Email</label>
+          <input name="email" type="email" ng-model="email" id="email" class="form-control" placeholder="Email" required>
+          <div ng-messages="noviaForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El email es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
           <label for="weddingDate">Fecha de la boda</label>
           <input name="weddingDate" type="date" ng-model="weddingDate" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required>
           <div ng-messages="noviaForm.weddingDate.$error" role="alert">
@@ -54,9 +61,13 @@
         <div class="form-group">
           <label for="howKnowUs">¿Cómo nos conociste?</label>
           <select name="howKnowUs" type="select" ng-model="howKnowUs" id="howKnowUs" class="form-control" required>
-            <option value="bodasnet">Bodas.net</option>
-            <option value="ouinoviascom">Ouinovias.com</option>
-            <option value="conocido">Conocido</option>
+            <option value="BODAS.NET">BODAS.NET</option>
+            <option value="GOOGLE">GOOGLE</option>
+            <option value="RRSS (INSTRAGRAM. FACEBOOK. PINTEREST)">RRSS (INTRAGRAM. FACEBOOK. PINTEREST)</option>
+            <option value="BLOGS">BLOGS</option>
+            <option value="AMIGA">AMIGA</option>
+            <option value="REVISTAS ESPECIALIZADAS (TELVA, VOGUE, WEDDING STYLE…)">REVISTAS ESPECIALIZADAS (TELVA, VOGUE, WEDDING STYLE…)</option>
+            <option value="WEDDING PLANNER">WEDDING PLANNER</option>
           </select>
         </div>
         <div class="form-group" show-errors>

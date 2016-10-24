@@ -1,0 +1,41 @@
+<section ng-controller="ProfesionalesController" ng-init="findOne()">
+  <div class="page-header">
+    <h1><span ng-bind="profesional.name"></span> <span ng-bind="profesional.surname"></span></h1>
+  </div>
+  <div class="pull-right" ng-show="authentication.user._id == profesional.user._id">
+    <a class="btn btn-primary" ui-sref="profesionales.edit({profesionalId: profesional._id})">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="remove();">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>Teléfono</strong></div>
+        <div class="col-md-6" ng-bind="profesional.phone"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Email</strong></div>
+        <div class="col-md-6" ng-bind="profesional.email"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Usuario de facebook</strong></div>
+        <div class="col-md-6" ng-bind="profesional.facebookUser"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Usuario de instagram</strong></div>
+        <div class="col-md-6" ng-bind="profesional.instagramUser"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Comentarios</strong></div>
+        <div class="col-md-6" ng-bind="profesional.comments"></div>
+      </div>
+    </div>
+  </div>
+</section>

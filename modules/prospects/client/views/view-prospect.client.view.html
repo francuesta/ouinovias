@@ -1,0 +1,46 @@
+<section ng-controller="ProspectsController" ng-init="findOne()">
+  <div class="page-header">
+    <h1><span ng-bind="prospect.name"></span> <span ng-bind="prospect.surname"></span></h1>
+  </div>
+  <div class="pull-right" ng-show="authentication.user._id == prospect.user._id">
+    <a class="btn btn-primary" ui-sref="prospects.edit({prospectId: prospect._id})">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="remove();">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>Teléfono</strong></div>
+        <div class="col-md-6" ng-bind="prospect.phone"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Email</strong></div>
+        <div class="col-md-6" ng-bind="prospect.email"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Fecha de la boda</strong></div>
+        <div class="col-md-6" ng-bind="prospect.weddingDate | date"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Hora de la boda</strong></div>
+        <div class="col-md-6" ng-bind="prospect.weddingHour"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Lugar de la boda</strong></div>
+        <div class="col-md-6" ng-bind="prospect.weddingPlace"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Comentarios de la boda</strong></div>
+        <div class="col-md-6" ng-bind="prospect.weddingComments"></div>
+      </div>
+    </div>
+  </div>
+</section>

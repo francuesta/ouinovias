@@ -123,6 +123,11 @@ ApplicationConfiguration.registerModule('profesionales');
 'use strict';
 
 // Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('prospects');
+
+'use strict';
+
+// Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users', ['core']);
 ApplicationConfiguration.registerModule('users.admin', ['core.admin']);
 ApplicationConfiguration.registerModule('users.admin.routes', ['core.admin.routes']);
@@ -941,6 +946,201 @@ angular.module('profesionales').factory('Profesionales', ['$resource',
   function ($resource) {
     return $resource('api/profesionales/:profesionalId', {
       profesionalId: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]);
+
+'use strict';
+
+// Configuring the Prospects module
+angular.module('prospects').run(['Menus',
+  function (Menus) {
+    // Add the prospects dropdown item
+    Menus.addMenuItem('topbar', {
+      title: 'Prospects',
+      state: 'prospects',
+      type: 'dropdown',
+      roles: ['*']
+    });
+
+    // Add the dropdown list item
+    Menus.addSubMenuItem('topbar', 'prospects', {
+      title: 'Listado',
+      state: 'prospects.list'
+    });
+
+    // Add the dropdown create item
+    Menus.addSubMenuItem('topbar', 'prospects', {
+      title: 'Alta',
+      state: 'prospects.create',
+      roles: ['user']
+    });
+  }
+]);
+
+'use strict';
+
+// Setting up route
+angular.module('prospects').config(['$stateProvider',
+  function ($stateProvider) {
+    // Prospects state routing
+    $stateProvider
+      .state('prospects', {
+        abstract: true,
+        url: '/prospects',
+        template: '<ui-view/>'
+      })
+      .state('prospects.list', {
+        url: '',
+        templateUrl: 'modules/prospects/client/views/list-prospects.client.view.html'
+      })
+      .state('prospects.create', {
+        url: '/create',
+        templateUrl: 'modules/prospects/client/views/create-prospect.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
+      .state('prospects.view', {
+        url: '/:prospectId',
+        templateUrl: 'modules/prospects/client/views/view-prospect.client.view.html'
+      })
+      .state('prospects.edit', {
+        url: '/:prospectId/edit',
+        templateUrl: 'modules/prospects/client/views/edit-prospect.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      });
+  }
+]);
+
+'use strict';
+
+// Prospects controller
+angular.module('prospects').controller('ProspectsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Prospects',
+  function ($scope, $stateParams, $location, Authentication, Prospects) {
+    $scope.authentication = Authentication;
+
+    // Create new Prospect
+    $scope.create = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'prospectForm');
+
+        return false;
+      }
+
+      //TODO
+
+      // Create new Prospect object
+      var prospect = new Prospects({
+        name: this.name,
+        surname: this.surname,
+        phone: this.phone,
+        email: this.email,
+        weddingDate: this.weddingDate,
+        weddingHour: this.weddingHour,
+        weddingPlace: this.weddingPlace,
+        weddingComments: this.weddingComments
+      });
+
+      // Redirect after save
+      prospect.$save(function (response) {
+        $location.path('prospects/' + response._id);
+
+        // Clear form fields
+        $scope.name = '';
+        $scope.surname = '';
+        $scope.phone = '';
+        $scope.email = '';
+        $scope.weddingDate = '';
+        $scope.weddingHour = '';
+        $scope.weddingPlace = '';
+        $scope.weddingComments = '';
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Remove existing Prospect
+    $scope.remove = function (prospect) {
+      if (prospect) {
+        prospect.$remove();
+
+        for (var i in $scope.prospects) {
+          if ($scope.prospects[i] === prospect) {
+            $scope.prospects.splice(i, 1);
+          }
+        }
+      } else {
+        $scope.prospect.$remove(function () {
+          $location.path('prospects');
+        });
+      }
+    };
+
+    // Update existing Prospect
+    $scope.update = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'prospectForm');
+
+        return false;
+      }
+
+      var prospect = $scope.prospect;
+
+      prospect.$update(function () {
+        $location.path('prospects/' + prospect._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Find a list of Prospects
+    $scope.find = function () {
+      $scope.prospectsFull = Prospects.query();
+      $scope.prospects = $scope.prospectsFull;
+    };
+
+    // Filter a list of Prospects
+    $scope.filter = function() {
+      var all = [];
+      // Loop over all
+      for (var i=0; i<$scope.prospectsFull.length; i++) {
+        var name = $scope.prospectsFull[i].name + ' ' + $scope.prospectsFull[i].surname;
+        name = name.toUpperCase();
+        var toSearch = $scope.search.toUpperCase();
+        if ($scope.search === '' || name.indexOf(toSearch) !== -1) {
+          all.push($scope.prospectsFull[i]);
+        }
+      }
+      $scope.prospects = all;
+    };
+
+    // Find existing Prospect
+    $scope.findOne = function () {
+      $scope.prospect = Prospects.get({
+        prospectId: $stateParams.prospectId
+      });
+    };
+  }
+]);
+
+'use strict';
+
+//Prospects service used for communicating with the prospects REST endpoints
+angular.module('prospects').factory('Prospects', ['$resource',
+  function ($resource) {
+    return $resource('api/prospects/:prospectId', {
+      prospectId: '@_id'
     }, {
       update: {
         method: 'PUT'

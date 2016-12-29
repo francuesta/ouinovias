@@ -9,8 +9,45 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <h4>¡¡¡Bodas en breve!!!</h4>
+  </div>
   <div class="list-group">
-    <a ng-repeat="novia in novias" ui-sref="novias.view({noviaId: novia._id})" class="list-group-item">
+    <a ng-repeat="novia in novias" ui-sref="novias.view({noviaId: novia._id})" class="list-group-item" ng-show="novia.imminentWedding">
+      <h4 class="list-group-item-heading">
+        <span ng-bind="novia.name"></span> <span class="list-group-item-heading" ng-bind="novia.surname"></span>
+      </h4>
+      <p class="list-group-item-text">
+        Se casa el día
+        <span ng-bind="novia.weddingDate | date:'dd/MM/yyyy'"></span>
+        en
+        <span ng-bind="novia.weddingPlace"></span>
+      </p>
+    </a>
+  </div>
+  <div class="row">
+    <h4>¡¡¡Pruebas en breve!!!</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="novia in novias" ui-sref="novias.view({noviaId: novia._id})" class="list-group-item" ng-show="!novia.imminentWedding && novia.imminentTest">
+      <h4 class="list-group-item-heading">
+        <span ng-bind="novia.name"></span> <span class="list-group-item-heading" ng-bind="novia.surname"></span>
+      </h4>
+      <p class="list-group-item-text">
+        La prueba debe realizarse el día <span ng-bind="novia.testDate | date:'dd/MM/yyyy'"></span>
+        en
+        <span ng-bind="novia.testPlace"></span>. Se casa el día
+        <span ng-bind="novia.weddingDate | date:'dd/MM/yyyy'"></span>
+        en
+        <span ng-bind="novia.weddingPlace"></span>
+      </p>
+    </a>
+  </div>
+  <div class="row">
+    <h4>Resto</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="novia in novias" ui-sref="novias.view({noviaId: novia._id})" class="list-group-item" ng-show="!novia.imminentWedding && !novia.imminentTest">
       <h4 class="list-group-item-heading">
         <span ng-bind="novia.name"></span> <span class="list-group-item-heading" ng-bind="novia.surname"></span>
       </h4>

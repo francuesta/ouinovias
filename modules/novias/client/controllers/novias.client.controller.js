@@ -104,15 +104,33 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
 
     // Update selected Professional
     $scope.updateProfessional = function() {
-      console.log('selected: ' + $scope.novia.selectedProfessional);
       $scope.novia.professional = $scope.novia.selectedProfessional._id;
-      console.log('selected: ' + $scope.novia.professional);
     };
 
     // Find a list of Novias
     $scope.find = function () {
-      $scope.noviasFull = Novias.query();
-      $scope.novias = $scope.noviasFull;
+      Novias.query({}, function(results) {
+        $scope.noviasFull = results;
+        // Loop over array to search next events
+        for (var i=0; i<$scope.noviasFull.length; i++) {
+          var novia = $scope.noviasFull[i];
+          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+          var now = new Date();
+          var diffWeddingDays = Math.round(Math.abs((new Date(novia.weddingDate).getTime() - now.getTime())/(oneDay)));
+          var diffTestDays = Math.round(Math.abs((new Date(novia.testDate).getTime() - now.getTime())/(oneDay)));
+          if (diffTestDays > 0 && diffTestDays < 15) {
+            novia.imminentTest = true;
+          } else {
+            novia.imminentTest = false;
+          }
+          if (diffWeddingDays > 0 && diffWeddingDays < 15) {
+            novia.imminentWedding = true;
+          } else {
+            novia.imminentWedding = false;
+          }
+        }
+        $scope.novias = $scope.noviasFull;
+      });
     };
 
     // Filter a list of Novias

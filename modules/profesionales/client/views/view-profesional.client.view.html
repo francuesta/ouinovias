@@ -2,7 +2,7 @@
   <div class="page-header">
     <h1><span ng-bind="profesional.name"></span> <span ng-bind="profesional.surname"></span></h1>
   </div>
-  <div class="pull-right" ng-show="authentication.user._id == profesional.user._id">
+  <div class="pull-right" ng-show="authentication.user.roles.indexOf('admin')!=-1">
     <a class="btn btn-primary" ui-sref="profesionales.edit({profesionalId: profesional._id})">
       <i class="glyphicon glyphicon-edit"></i>
     </a>

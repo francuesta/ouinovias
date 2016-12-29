@@ -7,5 +7,10 @@ angular.module('users.admin').run(['Menus',
       title: 'Gestión de Usuarios',
       state: 'admin.users'
     });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Crear usuario',
+      state: 'authentication.signup',
+      roles: ['admin']
+    });
   }
 ]);

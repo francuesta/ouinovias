@@ -39,8 +39,6 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var novia = req.novia;
 
-  //TODO
-
   novia.name = req.body.name;
   novia.surname = req.body.surname;
   novia.phone = req.body.phone;

@@ -562,13 +562,14 @@ angular.module('novias').run(['Menus',
       title: 'Novias',
       state: 'novias',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'novias', {
       title: 'Listado',
-      state: 'novias.list'
+      state: 'novias.list',
+      roles: ['user']
     });
 
     // Add the dropdown create item
@@ -609,10 +610,7 @@ angular.module('novias').config(['$stateProvider',
       })
       .state('novias.edit', {
         url: '/:noviaId/edit',
-        templateUrl: 'modules/novias/client/views/edit-novia.client.view.html',
-        data: {
-          roles: ['user', 'admin']
-        }
+        templateUrl: 'modules/novias/client/views/edit-novia.client.view.html'
       })
       .state('novias.mail', {
         url: '/:noviaId/mail',
@@ -824,13 +822,14 @@ angular.module('profesionales').run(['Menus',
       title: 'Profesionales',
       state: 'profesionales',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'profesionales', {
       title: 'Listado',
-      state: 'profesionales.list'
+      state: 'profesionales.list',
+      roles: ['user']
     });
 
     // Add the dropdown create item
@@ -1015,13 +1014,14 @@ angular.module('prospects').run(['Menus',
       title: 'Prospects',
       state: 'prospects',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'prospects', {
       title: 'Listado',
-      state: 'prospects.list'
+      state: 'prospects.list',
+      roles: ['user']
     });
 
     // Add the dropdown create item
@@ -1208,6 +1208,11 @@ angular.module('users.admin').run(['Menus',
     Menus.addSubMenuItem('topbar', 'admin', {
       title: 'Gestión de Usuarios',
       state: 'admin.users'
+    });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Crear usuario',
+      state: 'authentication.signup',
+      roles: ['admin']
     });
   }
 ]);

@@ -8,13 +8,14 @@ angular.module('profesionales').run(['Menus',
       title: 'Profesionales',
       state: 'profesionales',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'profesionales', {
       title: 'Listado',
-      state: 'profesionales.list'
+      state: 'profesionales.list',
+      roles: ['user']
     });
 
     // Add the dropdown create item

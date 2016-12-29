@@ -25,19 +25,16 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/novias',
-      permissions: ['get', 'post']
+      permissions: '*'
     }, {
       resources: '/api/novias/:noviaId',
-      permissions: ['get']
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],
     allows: [{
-      resources: '/api/novias',
-      permissions: ['get']
-    }, {
       resources: '/api/novias/:noviaId',
-      permissions: ['get']
+      permissions: '*'
     }]
   }]);
 };
@@ -48,8 +45,7 @@ exports.invokeRolesPolicies = function () {
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an novia is being processed and the current user created it then allow any manipulation
-  if (req.novia && req.user && req.novia.user.id === req.user.id) {
+  if (req.novia) {
     return next();
   }
 

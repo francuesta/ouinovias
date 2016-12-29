@@ -27,10 +27,7 @@ angular.module('novias').config(['$stateProvider',
       })
       .state('novias.edit', {
         url: '/:noviaId/edit',
-        templateUrl: 'modules/novias/client/views/edit-novia.client.view.html',
-        data: {
-          roles: ['user', 'admin']
-        }
+        templateUrl: 'modules/novias/client/views/edit-novia.client.view.html'
       })
       .state('novias.mail', {
         url: '/:noviaId/mail',

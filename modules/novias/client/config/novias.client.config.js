@@ -8,13 +8,14 @@ angular.module('novias').run(['Menus',
       title: 'Novias',
       state: 'novias',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'novias', {
       title: 'Listado',
-      state: 'novias.list'
+      state: 'novias.list',
+      roles: ['user']
     });
 
     // Add the dropdown create item

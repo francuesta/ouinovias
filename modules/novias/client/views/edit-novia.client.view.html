@@ -35,7 +35,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="weddingDate">Fecha de la boda</label>
-          <input name="weddingDate" type="date" ng-model="novia.weddingDate" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required>
+          <input name="weddingDate" type="date" ng-model="novia.weddingDateDt" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required ng-change="novia.weddingDate = novia.weddingDateDt.toISOString()">
           <div ng-messages="noviaForm.weddingDate.$error" role="alert">
             <p class="help-block error-text" ng-message="required">La fecha de la boda es obligatoria.</p>
           </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="testDate">Fecha de la prueba</label>
-          <input name="testDate" type="date" ng-model="novia.testDate" id="testDate" class="form-control" placeholder="Fecha de la prueba">
+          <input name="testDate" type="date" ng-model="novia.testDateDt" id="testDate" class="form-control" placeholder="Fecha de la prueba" ng-change="novia.testDate = novia.testDateDt.toISOString()">
         </div>
         <div class="form-group" show-errors>
           <label for="testHour">Hora de la prueba</label>

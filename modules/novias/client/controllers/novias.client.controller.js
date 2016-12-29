@@ -46,6 +46,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.phone = '';
         $scope.email = '';
         $scope.weddingDate = '';
+        $scope.weddingDateDt = '';
         $scope.weddingHour = '';
         $scope.weddingPlace = '';
         $scope.weddingComments = '';
@@ -53,6 +54,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.facebookUser = '';
         $scope.instagramUser = '';
         $scope.testDate = '';
+        $scope.testDateDt = '';
         $scope.testHour = '';
         $scope.testPlace = '';
         $scope.testComments = '';
@@ -122,6 +124,9 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
     $scope.findOne = function () {
       $scope.novia = Novias.get({
         noviaId: $stateParams.noviaId
+      }, function() {
+        $scope.novia.weddingDateDt = new Date($scope.novia.weddingDate);
+        $scope.novia.testDateDt = new Date($scope.novia.testDate);
       });
     };
   }

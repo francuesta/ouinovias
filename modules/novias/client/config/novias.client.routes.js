@@ -31,6 +31,13 @@ angular.module('novias').config(['$stateProvider',
         data: {
           roles: ['user', 'admin']
         }
+      })
+      .state('novias.mail', {
+        url: '/:noviaId/mail',
+        templateUrl: 'modules/novias/client/views/mail-novia.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       });
   }
 ]);

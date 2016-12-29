@@ -613,6 +613,13 @@ angular.module('novias').config(['$stateProvider',
         data: {
           roles: ['user', 'admin']
         }
+      })
+      .state('novias.mail', {
+        url: '/:noviaId/mail',
+        templateUrl: 'modules/novias/client/views/mail-novia.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       });
   }
 ]);
@@ -626,6 +633,23 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
     Profesionales.query({},function(results) {
       $scope.profesionales = results;
     });
+
+    var setFlags = function(novia) {
+      var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+      var now = new Date();
+      var diffWeddingDays = Math.ceil(Math.abs((new Date(novia.weddingDate).getTime() - now.getTime())/(oneDay)));
+      var diffTestDays = Math.ceil(Math.abs((new Date(novia.testDate).getTime() - now.getTime())/(oneDay)));
+      if (diffTestDays > 0 && diffTestDays < 15) {
+        novia.imminentTest = true;
+      } else {
+        novia.imminentTest = false;
+      }
+      if (diffWeddingDays > 0 && diffWeddingDays < 15) {
+        novia.imminentWedding = true;
+      } else {
+        novia.imminentWedding = false;
+      }
+    };
 
     // Create new Novia
     $scope.create = function (isValid) {
@@ -732,21 +756,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.noviasFull = results;
         // Loop over array to search next events
         for (var i=0; i<$scope.noviasFull.length; i++) {
-          var novia = $scope.noviasFull[i];
-          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-          var now = new Date();
-          var diffWeddingDays = Math.round(Math.abs((new Date(novia.weddingDate).getTime() - now.getTime())/(oneDay)));
-          var diffTestDays = Math.round(Math.abs((new Date(novia.testDate).getTime() - now.getTime())/(oneDay)));
-          if (diffTestDays > 0 && diffTestDays < 15) {
-            novia.imminentTest = true;
-          } else {
-            novia.imminentTest = false;
-          }
-          if (diffWeddingDays > 0 && diffWeddingDays < 15) {
-            novia.imminentWedding = true;
-          } else {
-            novia.imminentWedding = false;
-          }
+          setFlags($scope.noviasFull[i]);
         }
         $scope.novias = $scope.noviasFull;
       });
@@ -774,6 +784,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
       }, function() {
         $scope.novia.weddingDateDt = new Date($scope.novia.weddingDate);
         $scope.novia.testDateDt = new Date($scope.novia.testDate);
+        setFlags($scope.novia);
         Profesionales.query({},function(results) {
           for (var i=0; i<results.length; i++) {
             if (results[i]._id === $scope.novia.professional) {

@@ -1,0 +1,38 @@
+<section ng-controller="NoviasController" ng-init="findOne()">
+  <div class="page-header">
+    <h1><span>Emails de recordatorios</span></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h4>Direcciones</h4>
+      <div class="row">
+        <div class="col-md-3"><strong>Novia</strong></div>
+        <div class="col-md-6" ng-bind="novia.email"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"><strong>Profesional</strong></div>
+        <div class="col-md-6" ng-bind="novia.selectedProfessional.email"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="novia.imminentTest">
+    <div class="col-md-8">
+      <h4>Email prueba</h4>
+      <div class="row">
+        <div class="col-md-3"><strong>Texto</strong></div>
+        <div class="col-md-6">Hola {{novia.name}}, te recordamos que el día {{novia.testDate | date:'dd/MM/yyyy'}} a las {{novia.testHour}} en {{novia.testPlace}} realizaremos la prueba de peinado y maquillaje a cargo de {{novia.selectedProfessional.name}} {{novia.selectedProfessional.surname}}.
+        <br/>Un saludo</div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="novia.imminentWedding">
+    <div class="col-md-8">
+      <h4>Email boda</h4>
+      <div class="row">
+        <div class="col-md-3"><strong>Texto</strong></div>
+        <div class="col-md-6">Hola {{novia.name}}, te recordamos que el día {{novia.weddingDate | date:'dd/MM/yyyy'}} a las {{novia.weddingHour}} en {{novia.weddingPlace}} tiene lugar tu boda, por lo que a partir de 3 horas antes, el profesional {{novia.selectedProfessional.name}} {{novia.selectedProfessional.surname}} se desplazará al lugar acordado para realizar el peinado y maquillaje pactados en la prueba.
+        <br/>Un saludo</div>
+      </div>
+    </div>
+  </div>
+</section>

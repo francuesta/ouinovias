@@ -95,6 +95,10 @@
           <textarea name="testComments" ng-model="novia.testComments" id="testComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la prueba"></textarea>
         </div>
         <div class="form-group">
+          <label for="professional">Profesional</label>
+          <select name="professional" id="professional" class="form-control" data-ng-options="(o.name + ' ' + o.surname) for o in profesionales" data-ng-model="novia.selectedProfessional" ng-change="updateProfessional()"></select>
+        </div>
+        <div class="form-group">
           <input type="submit" value="Actualizar" class="btn btn-default">
         </div>
         <div ng-show="error" class="text-danger">

@@ -89,6 +89,10 @@ var NoviaSchema = new Schema({
     default: '',
     trim: true
   },
+  professional: {
+    type : Schema.ObjectId, 
+    ref : 'Profesional'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

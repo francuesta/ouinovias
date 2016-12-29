@@ -56,6 +56,7 @@ exports.update = function (req, res) {
   novia.testHour = req.body.testHour;
   novia.testPlace = req.body.testPlace;
   novia.testComments = req.body.testComments;
+  novia.professional = req.body.professional;
 
   novia.save(function (err) {
     if (err) {

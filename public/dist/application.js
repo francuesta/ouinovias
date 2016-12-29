@@ -620,9 +620,12 @@ angular.module('novias').config(['$stateProvider',
 'use strict';
 
 // Novias controller
-angular.module('novias').controller('NoviasController', ['$scope', '$stateParams', '$location', 'Authentication', 'Novias',
-  function ($scope, $stateParams, $location, Authentication, Novias) {
+angular.module('novias').controller('NoviasController', ['$scope', '$stateParams', '$location', 'Authentication', 'Novias', 'Profesionales',
+  function ($scope, $stateParams, $location, Authentication, Novias, Profesionales) {
     $scope.authentication = Authentication;
+    Profesionales.query({},function(results) {
+      $scope.profesionales = results;
+    });
 
     // Create new Novia
     $scope.create = function (isValid) {
@@ -633,8 +636,6 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
 
         return false;
       }
-
-      //TODO
 
       // Create new Novia object
       var novia = new Novias({
@@ -652,7 +653,8 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         testDate: this.testDate,
         testHour: this.testHour,
         testPlace: this.testPlace,
-        testComments: this.testComments
+        testComments: this.testComments,
+        professional: this.professional
       });
 
       // Redirect after save
@@ -677,6 +679,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.testHour = '';
         $scope.testPlace = '';
         $scope.testComments = '';
+        $scope.professional = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -718,6 +721,13 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
       });
     };
 
+    // Update selected Professional
+    $scope.updateProfessional = function() {
+      console.log('selected: ' + $scope.novia.selectedProfessional);
+      $scope.novia.professional = $scope.novia.selectedProfessional._id;
+      console.log('selected: ' + $scope.novia.professional);
+    };
+
     // Find a list of Novias
     $scope.find = function () {
       $scope.noviasFull = Novias.query();
@@ -746,6 +756,15 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
       }, function() {
         $scope.novia.weddingDateDt = new Date($scope.novia.weddingDate);
         $scope.novia.testDateDt = new Date($scope.novia.testDate);
+        Profesionales.query({},function(results) {
+          for (var i=0; i<results.length; i++) {
+            if (results[i]._id === $scope.novia.professional) {
+              $scope.novia.professionalText = results[i].name + ' ' + results[i].surname;
+              $scope.novia.selectedProfessional = results[i];
+            }
+          }
+          $scope.profesionales = results;
+        });
       });
     };
   }
@@ -847,8 +866,6 @@ angular.module('profesionales').controller('ProfesionalesController', ['$scope',
 
         return false;
       }
-
-      //TODO
 
       // Create new Profesional object
       var profesional = new Profesionales({

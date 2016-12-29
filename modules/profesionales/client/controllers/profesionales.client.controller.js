@@ -15,8 +15,6 @@ angular.module('profesionales').controller('ProfesionalesController', ['$scope',
         return false;
       }
 
-      //TODO
-
       // Create new Profesional object
       var profesional = new Profesionales({
         name: this.name,

@@ -88,7 +88,7 @@ exports.delete = function (req, res) {
  * List of Novias
  */
 exports.list = function (req, res) {
-  Novia.find().sort('-created').populate('user', 'displayName').exec(function (err, novias) {
+  Novia.find().sort('-weddingDate').populate('user', 'displayName').exec(function (err, novias) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

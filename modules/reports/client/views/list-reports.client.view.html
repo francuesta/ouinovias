@@ -1,0 +1,32 @@
+<section ng-controller="ReportsController" ng-init="find()">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Por año y mes</h1>
+      </div>
+    </div>
+  </div>
+  <div class="list-group" ng-repeat="year in reports.byYearAndMonth" class="list-group-item">
+	  <h4 class="list-group-item-heading">
+	    <span ng-bind="year.year"></span> - Total: <span class="list-group-item-heading" ng-bind="year.novias.length"></span>
+	  </h4>
+	  <p class="list-group-item-text" ng-repeat="month in year.months">
+	    <span ng-bind="month.text"></span>: <span class="list-group-item-heading" ng-bind="month.novias.length"></span>
+	  </p>
+  </div>
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Por profesional y año</h1>
+      </div>
+    </div>
+  </div>
+  <div class="list-group" ng-repeat="professional in reports.byProfessionalAndYear" class="list-group-item">
+	  <h4 class="list-group-item-heading">
+	    <span ng-bind="professional.text"></span> - Total: <span class="list-group-item-heading" ng-bind="professional.novias.length"></span>
+	  </h4>
+	  <p class="list-group-item-text" ng-repeat="year in professional.years">
+	    <span ng-bind="year.year"></span>: <span class="list-group-item-heading" ng-bind="year.novias.length"></span>
+	  </p>
+  </div>
+</section>

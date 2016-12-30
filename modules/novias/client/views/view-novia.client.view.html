@@ -6,7 +6,7 @@
     <a class="btn btn-primary" ui-sref="novias.edit({noviaId: novia._id})">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
-    <a class="btn btn-primary" ui-sref="novias.mail({noviaId: novia._id})" ng-show="authentication.user && authentication.user.roles.indexOf('admin')!=-1">
+    <a class="btn btn-primary" ui-sref="novias.mail({noviaId: novia._id})" ng-show="authentication.user && (authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1)">
       <i class="glyphicon glyphicon-inbox"></i>
     </a>
     <a class="btn btn-primary" ng-click="remove();" ng-show="authentication.user && authentication.user.roles.indexOf('admin')!=-1">

@@ -8,21 +8,21 @@ angular.module('prospects').run(['Menus',
       title: 'Prospects',
       state: 'prospects',
       type: 'dropdown',
-      roles: ['user']
+      roles: ['user','admin']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'prospects', {
       title: 'Listado',
       state: 'prospects.list',
-      roles: ['user']
+      roles: ['user','admin']
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'prospects', {
       title: 'Alta',
       state: 'prospects.create',
-      roles: ['user']
+      roles: ['user','admin']
     });
   }
 ]);

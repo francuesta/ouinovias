@@ -12,7 +12,10 @@ angular.module('prospects').config(['$stateProvider',
       })
       .state('prospects.list', {
         url: '',
-        templateUrl: 'modules/prospects/client/views/list-prospects.client.view.html'
+        templateUrl: 'modules/prospects/client/views/list-prospects.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('prospects.create', {
         url: '/create',
@@ -23,7 +26,10 @@ angular.module('prospects').config(['$stateProvider',
       })
       .state('prospects.view', {
         url: '/:prospectId',
-        templateUrl: 'modules/prospects/client/views/view-prospect.client.view.html'
+        templateUrl: 'modules/prospects/client/views/view-prospect.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('prospects.edit', {
         url: '/:prospectId/edit',

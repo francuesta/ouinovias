@@ -25,20 +25,14 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/profesionales',
-      permissions: ['get', 'post']
+      permissions: ['*']
     }, {
       resources: '/api/profesionales/:profesionalId',
-      permissions: ['get']
+      permissions: ['get','post','put']
     }]
   }, {
     roles: ['guest'],
-    allows: [{
-      resources: '/api/profesionales',
-      permissions: ['get']
-    }, {
-      resources: '/api/profesionales/:profesionalId',
-      permissions: ['get']
-    }]
+    allows: []
   }]);
 };
 

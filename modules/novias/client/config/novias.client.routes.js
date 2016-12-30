@@ -12,7 +12,10 @@ angular.module('novias').config(['$stateProvider',
       })
       .state('novias.list', {
         url: '',
-        templateUrl: 'modules/novias/client/views/list-novias.client.view.html'
+        templateUrl: 'modules/novias/client/views/list-novias.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('novias.create', {
         url: '/create',

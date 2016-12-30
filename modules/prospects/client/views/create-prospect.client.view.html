@@ -14,17 +14,11 @@
         </div>
         <div class="form-group" show-errors>
           <label for="surname">Apellidos</label>
-          <input name="surname" type="text" ng-model="surname" id="surname" class="form-control" placeholder="Apellidos" required>
-          <div ng-messages="prospectForm.surname.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">El apellido es obligatorio.</p>
-          </div>
+          <input name="surname" type="text" ng-model="surname" id="surname" class="form-control" placeholder="Apellidos">
         </div>
         <div class="form-group" show-errors>
           <label for="phone">Teléfono</label>
-          <input name="phone" type="phone" ng-model="phone" id="phone" class="form-control" placeholder="Teléfono" required>
-          <div ng-messages="prospectForm.phone.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">El teléfono es obligatorio.</p>
-          </div>
+          <input name="phone" type="phone" ng-model="phone" id="phone" class="form-control" placeholder="Teléfono">
         </div>
         <div class="form-group" show-errors>
           <label for="email">Email</label>
@@ -35,24 +29,15 @@
         </div>
         <div class="form-group" show-errors>
           <label for="weddingDate">Fecha de la boda</label>
-          <input name="weddingDate" type="text" ng-model="weddingDate" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required>
-          <div ng-messages="prospectForm.weddingDate.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">La fecha de la boda es obligatoria.</p>
-          </div>
+          <input name="weddingDate" type="date"  ng-model="weddingDateDt" id="weddingDate" class="form-control" placeholder="Fecha de la boda" ng-change="this.weddingDate = weddingDateDt.toISOString()">
         </div>
         <div class="form-group" show-errors>
           <label for="weddingHour">Hora de la boda</label>
-          <input name="weddingHour" type="text" ng-model="weddingHour" id="weddingHour" class="form-control" placeholder="Hora de la boda" required>
-          <div ng-messages="prospectForm.weddingHour.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">La hora de la boda es obligatoria.</p>
-          </div>
+          <input name="weddingHour" type="text" ng-model="weddingHour" id="weddingHour" class="form-control" placeholder="Hora de la boda">
         </div>
         <div class="form-group" show-errors>
           <label for="weddingPlace">Lugar de la boda</label>
-          <input name="weddingPlace" type="text" ng-model="weddingPlace" id="weddingPlace" class="form-control" placeholder="Lugar de la boda" required>
-          <div ng-messages="prospectForm.weddingPlace.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">El lugar de la boda es obligatorio.</p>
-          </div>
+          <input name="weddingPlace" type="text" ng-model="weddingPlace" id="weddingPlace" class="form-control" placeholder="Lugar de la boda">
         </div>
         <div class="form-group">
           <label for="weddingComments">Comentarios de la boda</label>

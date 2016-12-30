@@ -595,7 +595,10 @@ angular.module('novias').config(['$stateProvider',
       })
       .state('novias.list', {
         url: '',
-        templateUrl: 'modules/novias/client/views/list-novias.client.view.html'
+        templateUrl: 'modules/novias/client/views/list-novias.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('novias.create', {
         url: '/create',
@@ -822,21 +825,21 @@ angular.module('profesionales').run(['Menus',
       title: 'Profesionales',
       state: 'profesionales',
       type: 'dropdown',
-      roles: ['user']
+      roles: ['user','admin']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'profesionales', {
       title: 'Listado',
       state: 'profesionales.list',
-      roles: ['user']
+      roles: ['user','admin']
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'profesionales', {
       title: 'Alta',
       state: 'profesionales.create',
-      roles: ['user']
+      roles: ['user','admin']
     });
   }
 ]);
@@ -855,7 +858,10 @@ angular.module('profesionales').config(['$stateProvider',
       })
       .state('profesionales.list', {
         url: '',
-        templateUrl: 'modules/profesionales/client/views/list-profesionales.client.view.html'
+        templateUrl: 'modules/profesionales/client/views/list-profesionales.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('profesionales.create', {
         url: '/create',
@@ -866,7 +872,10 @@ angular.module('profesionales').config(['$stateProvider',
       })
       .state('profesionales.view', {
         url: '/:profesionalId',
-        templateUrl: 'modules/profesionales/client/views/view-profesional.client.view.html'
+        templateUrl: 'modules/profesionales/client/views/view-profesional.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('profesionales.edit', {
         url: '/:profesionalId/edit',
@@ -1014,21 +1023,21 @@ angular.module('prospects').run(['Menus',
       title: 'Prospects',
       state: 'prospects',
       type: 'dropdown',
-      roles: ['user']
+      roles: ['user','admin']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'prospects', {
       title: 'Listado',
       state: 'prospects.list',
-      roles: ['user']
+      roles: ['user','admin']
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'prospects', {
       title: 'Alta',
       state: 'prospects.create',
-      roles: ['user']
+      roles: ['user','admin']
     });
   }
 ]);
@@ -1047,7 +1056,10 @@ angular.module('prospects').config(['$stateProvider',
       })
       .state('prospects.list', {
         url: '',
-        templateUrl: 'modules/prospects/client/views/list-prospects.client.view.html'
+        templateUrl: 'modules/prospects/client/views/list-prospects.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('prospects.create', {
         url: '/create',
@@ -1058,7 +1070,10 @@ angular.module('prospects').config(['$stateProvider',
       })
       .state('prospects.view', {
         url: '/:prospectId',
-        templateUrl: 'modules/prospects/client/views/view-prospect.client.view.html'
+        templateUrl: 'modules/prospects/client/views/view-prospect.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('prospects.edit', {
         url: '/:prospectId/edit',
@@ -1111,6 +1126,7 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         $scope.phone = '';
         $scope.email = '';
         $scope.weddingDate = '';
+        $scope.weddingDateDt = '';
         $scope.weddingHour = '';
         $scope.weddingPlace = '';
         $scope.weddingComments = '';
@@ -1180,6 +1196,8 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
     $scope.findOne = function () {
       $scope.prospect = Prospects.get({
         prospectId: $stateParams.prospectId
+      }, function() {
+        $scope.prospect.weddingDateDt = new Date($scope.prospect.weddingDate);
       });
     };
   }

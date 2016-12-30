@@ -14,11 +14,14 @@
       <h4 class="list-group-item-heading">
         <span ng-bind="prospect.name"></span> <span class="list-group-item-heading" ng-bind="prospect.surname"></span>
       </h4>
-      <p class="list-group-item-text">
+      <p class="list-group-item-text" ng-if="prospect.weddingDate != null">
         Se casa el día
-        <span ng-bind="prospect.weddingDate"></span>
+        <span ng-bind="prospect.weddingDate | date:'dd/MM/yyyy'"></span>
         en
         <span ng-bind="prospect.weddingPlace"></span>
+      </p>
+      <p class="list-group-item-text" ng-if="prospect.weddingDate == null">
+        <i>Sin datos de fecha/lugar</i>
       </p>
     </a>
   </div>

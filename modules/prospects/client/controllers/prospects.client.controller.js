@@ -39,6 +39,7 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         $scope.phone = '';
         $scope.email = '';
         $scope.weddingDate = '';
+        $scope.weddingDateDt = '';
         $scope.weddingHour = '';
         $scope.weddingPlace = '';
         $scope.weddingComments = '';
@@ -108,6 +109,8 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
     $scope.findOne = function () {
       $scope.prospect = Prospects.get({
         prospectId: $stateParams.prospectId
+      }, function() {
+        $scope.prospect.weddingDateDt = new Date($scope.prospect.weddingDate);
       });
     };
   }

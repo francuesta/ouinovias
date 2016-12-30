@@ -12,7 +12,10 @@ angular.module('profesionales').config(['$stateProvider',
       })
       .state('profesionales.list', {
         url: '',
-        templateUrl: 'modules/profesionales/client/views/list-profesionales.client.view.html'
+        templateUrl: 'modules/profesionales/client/views/list-profesionales.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('profesionales.create', {
         url: '/create',
@@ -23,7 +26,10 @@ angular.module('profesionales').config(['$stateProvider',
       })
       .state('profesionales.view', {
         url: '/:profesionalId',
-        templateUrl: 'modules/profesionales/client/views/view-profesional.client.view.html'
+        templateUrl: 'modules/profesionales/client/views/view-profesional.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('profesionales.edit', {
         url: '/:profesionalId/edit',

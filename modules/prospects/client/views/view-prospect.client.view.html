@@ -2,11 +2,11 @@
   <div class="page-header">
     <h1><span ng-bind="prospect.name"></span> <span ng-bind="prospect.surname"></span></h1>
   </div>
-  <div class="pull-right" ng-show="authentication.user._id == prospect.user._id">
-    <a class="btn btn-primary" ui-sref="prospects.edit({prospectId: prospect._id})">
+  <div class="pull-right">
+    <a class="btn btn-primary" ui-sref="prospects.edit({prospectId: prospect._id})" ng-show="authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
-    <a class="btn btn-primary" ng-click="remove();">
+    <a class="btn btn-primary" ng-click="remove()" ng-show="authentication.user.roles.indexOf('admin')!=-1">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
@@ -24,7 +24,7 @@
       <hr/>
       <div class="row">
         <div class="col-md-3"><strong>Fecha de la boda</strong></div>
-        <div class="col-md-6" ng-bind="prospect.weddingDate | date"></div>
+        <div class="col-md-6" ng-bind="prospect.weddingDate | date:'dd/MM/yyyy'"></div>
       </div>
       <hr/>
       <div class="row">

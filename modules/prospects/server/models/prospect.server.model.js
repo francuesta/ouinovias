@@ -23,14 +23,12 @@ var ProspectSchema = new Schema({
   surname: {
     type: String,
     default: '',
-    trim: true,
-    required: 'Apellido es obligatorio'
+    trim: true
   },
   phone: {
     type: Number,
     default: '',
-    trim: true,
-    required: 'Teléfono es obligatorio'
+    trim: true
   },
   email: {
     type: String,
@@ -39,18 +37,15 @@ var ProspectSchema = new Schema({
     required: 'Email es obligatorio'
   },
   weddingDate: {
-    type: String,
-    required: 'Fecha de la boda obligatoria'
+    type: String
   },
   weddingHour: {
-    type: String,
-    required: 'Hora de la boda obligatoria'
+    type: String
   },
   weddingPlace: {
     type: String,
     default: '',
-    trim: true,
-    required: 'Lugar de la boda obligatorio'
+    trim: true
   },
   weddingComments: {
     type: String,

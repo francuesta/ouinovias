@@ -631,9 +631,11 @@ angular.module('novias').config(['$stateProvider',
 angular.module('novias').controller('NoviasController', ['$scope', '$stateParams', '$location', 'Authentication', 'Novias', 'Profesionales',
   function ($scope, $stateParams, $location, Authentication, Novias, Profesionales) {
     $scope.authentication = Authentication;
-    Profesionales.query({},function(results) {
-      $scope.profesionales = results;
-    });
+    if ($scope.authentication.user) {
+      Profesionales.query({},function(results) {
+        $scope.profesionales = results;
+      });
+    }
 
     var setFlags = function(novia) {
       var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
@@ -786,15 +788,17 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.novia.weddingDateDt = new Date($scope.novia.weddingDate);
         $scope.novia.testDateDt = new Date($scope.novia.testDate);
         setFlags($scope.novia);
-        Profesionales.query({},function(results) {
-          for (var i=0; i<results.length; i++) {
-            if (results[i]._id === $scope.novia.professional) {
-              $scope.novia.professionalText = results[i].name + ' ' + results[i].surname;
-              $scope.novia.selectedProfessional = results[i];
+        if ($scope.authentication.user) {
+          Profesionales.query({},function(results) {
+            for (var i=0; i<results.length; i++) {
+              if (results[i]._id === $scope.novia.professional) {
+                $scope.novia.professionalText = results[i].name + ' ' + results[i].surname;
+                $scope.novia.selectedProfessional = results[i];
+              }
             }
-          }
-          $scope.profesionales = results;
-        });
+            $scope.profesionales = results;
+          });
+        }
       });
     };
   }

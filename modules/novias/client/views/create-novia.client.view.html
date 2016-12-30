@@ -94,13 +94,15 @@
           <label for="testComments">Comentarios de la prueba</label>
           <textarea name="testComments" ng-model="testComments" id="testComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la prueba"></textarea>
         </div>
-        <div class="form-group">
-          <label for="professional">Profesional</label>
-          <select name="professional" id="professional" ng-model="professional" class="form-control" >
-            <option ng-repeat="profesional in profesionales" value="{{profesional._id}}">
-                {{profesional.name}} {{profesional.surname}}
-            </option>
-          </select>
+        <div ng-show="authentication.user && (authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1)">
+          <div class="form-group">
+            <label for="professional">Profesional</label>
+            <select name="professional" id="professional" ng-model="professional" class="form-control" >
+              <option ng-repeat="profesional in profesionales" value="{{profesional._id}}">
+                  {{profesional.name}} {{profesional.surname}}
+              </option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
           <input type="submit" class="btn btn-default">

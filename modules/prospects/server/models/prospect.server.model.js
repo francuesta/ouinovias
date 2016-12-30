@@ -52,6 +52,10 @@ var ProspectSchema = new Schema({
     default: '',
     trim: true
   },
+  bride: {
+    type: Schema.ObjectId,
+    ref: 'Novia'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

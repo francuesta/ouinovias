@@ -1,8 +1,8 @@
 'use strict';
 
 // Prospects controller
-angular.module('prospects').controller('ProspectsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Prospects',
-  function ($scope, $stateParams, $location, Authentication, Prospects) {
+angular.module('prospects').controller('ProspectsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Prospects', 'Novias',
+  function ($scope, $stateParams, $location, Authentication, Prospects, Novias) {
     $scope.authentication = Authentication;
 
     // Create new Prospect
@@ -14,8 +14,6 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
 
         return false;
       }
-
-      //TODO
 
       // Create new Prospect object
       var prospect = new Prospects({
@@ -111,6 +109,47 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         prospectId: $stateParams.prospectId
       }, function() {
         $scope.prospect.weddingDateDt = new Date($scope.prospect.weddingDate);
+      });
+    };
+
+    // Convert prospect to novia
+    $scope.convert = function(prospect) {
+      $scope.error = null;
+
+      // Create new Novia object
+      var novia = new Novias({
+        name: prospect.name,
+        surname: prospect.surname,
+        phone: prospect.phone,
+        email: prospect.email,
+        weddingDate: prospect.weddingDate,
+        weddingHour: prospect.weddingHour,
+        weddingPlace: prospect.weddingPlace,
+        weddingComments: prospect.weddingComments
+      });
+
+      // Redirect after save
+      novia.$save(function (response) {
+        // Clear form fields
+        $scope.name = '';
+        $scope.surname = '';
+        $scope.phone = '';
+        $scope.email = '';
+        $scope.weddingDate = '';
+        $scope.weddingDateDt = '';
+        $scope.weddingHour = '';
+        $scope.weddingPlace = '';
+        $scope.weddingComments = '';
+        // Update prospect reference
+        prospect.bride = response._id;
+        prospect.$update(function () {
+          // Redirect to bride page
+          $location.path('novias/' + response._id + '/edit');
+        }, function (errorResponse) {
+          $scope.error = errorResponse.data.message;
+        });
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
       });
     };
   }

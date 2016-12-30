@@ -39,8 +39,6 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var prospect = req.prospect;
 
-  //TODO
-
   prospect.name = req.body.name;
   prospect.surname = req.body.surname;
   prospect.phone = req.body.phone;
@@ -49,6 +47,7 @@ exports.update = function (req, res) {
   prospect.weddingHour = req.body.weddingHour;
   prospect.weddingPlace = req.body.weddingPlace;
   prospect.weddingComments = req.body.weddingComments;
+  prospect.bride = req.body.bride;
 
   prospect.save(function (err) {
     if (err) {

@@ -17,11 +17,14 @@
       <h4 class="list-group-item-heading">
         <span ng-bind="novia.name"></span> <span class="list-group-item-heading" ng-bind="novia.surname"></span>
       </h4>
-      <p class="list-group-item-text">
+      <p class="list-group-item-text" ng-if="novia.weddingDate != null">
         Se casa el día
         <span ng-bind="novia.weddingDate | date:'dd/MM/yyyy'"></span>
         en
         <span ng-bind="novia.weddingPlace"></span>
+      </p>
+      <p class="list-group-item-text" ng-if="novia.weddingDate == null">
+        <i>Sin datos de fecha/lugar</i>
       </p>
     </a>
   </div>
@@ -51,11 +54,14 @@
       <h4 class="list-group-item-heading">
         <span ng-bind="novia.name"></span> <span class="list-group-item-heading" ng-bind="novia.surname"></span>
       </h4>
-      <p class="list-group-item-text">
+      <p class="list-group-item-text" ng-if="novia.weddingDate != null">
         Se casa el día
         <span ng-bind="novia.weddingDate | date:'dd/MM/yyyy'"></span>
         en
         <span ng-bind="novia.weddingPlace"></span>
+      </p>
+      <p class="list-group-item-text" ng-if="novia.weddingDate == null">
+        <i>Sin datos de fecha/lugar</i>
       </p>
     </a>
   </div>

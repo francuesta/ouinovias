@@ -1,0 +1,39 @@
+<section ng-controller="PricesController">
+  <div class="page-header">
+    <h1>Alta de precio</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="priceForm" class="form-horizontal" ng-submit="create(priceForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="year">Año</label>
+          <input name="year" type="number" ng-model="year" id="year" class="form-control" placeholder="Año" required>
+          <div ng-messages="priceForm.year.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El año es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="professional">Profesional</label>
+          <select name="professional" id="professional" ng-model="professional" class="form-control" >
+            <option ng-repeat="profesional in profesionales" value="{{profesional._id}}">
+                {{profesional.name}} {{profesional.surname}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group" ng-repeat="service in services">
+          <label for="prices{{service.seq}}">{{service.name}}</label>
+          <input name="prices{{service.seq}}" type="number" ng-model="service.price" id="price{{service.seq}}" class="form-control" placeholder="{{service.name}}" required>
+          <div ng-messages="priceForm.year.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El precio es obligatorio.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-default">
+        </div>
+        <div ng-show="error" class="text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

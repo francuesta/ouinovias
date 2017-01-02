@@ -1,0 +1,23 @@
+<section ng-controller="ServicesController" ng-init="findOne()">
+  <div class="page-header">
+    <h1><span ng-bind="service.name"></span></h1>
+  </div>
+  <div class="pull-right">
+    <a class="btn btn-primary" ui-sref="services.edit({serviceId: service._id})" ng-show="authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>ID</strong></div>
+        <div class="col-md-6" ng-bind="service.seq"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Nombre</strong></div>
+        <div class="col-md-6" ng-bind="service.name"></div>
+      </div>
+    </div>
+  </div>
+</section>

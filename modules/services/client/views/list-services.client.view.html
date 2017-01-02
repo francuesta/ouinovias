@@ -1,0 +1,19 @@
+<section ng-controller="ServicesController" ng-init="find()">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Servicios</h1>
+      </div>
+    </div>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="service in services" ui-sref="services.view({serviceId: service._id})" class="list-group-item">
+      <h4 class="list-group-item-heading">
+        <span ng-bind="service.seq"></span> - <span ng-bind="service.name"></span>
+      </h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="services.$resolved && !services.length">
+    No hay datos aún, ¿<a ui-sref="services.create">Los creamos</a>?
+  </div>
+</section>

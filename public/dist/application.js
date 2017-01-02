@@ -118,6 +118,11 @@ ApplicationConfiguration.registerModule('novias');
 'use strict';
 
 // Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('prices');
+
+'use strict';
+
+// Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('profesionales');
 
 'use strict';
@@ -129,6 +134,11 @@ ApplicationConfiguration.registerModule('prospects');
 
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('reports');
+
+'use strict';
+
+// Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('services');
 
 'use strict';
 
@@ -826,6 +836,197 @@ angular.module('novias').factory('Novias', ['$resource',
 
 'use strict';
 
+// Setting up route
+angular.module('prices').config(['$stateProvider',
+  function ($stateProvider) {
+    // Prices state routing
+    $stateProvider
+      .state('prices', {
+        abstract: true,
+        url: '/prices',
+        template: '<ui-view/>'
+      })
+      .state('prices.list', {
+        url: '',
+        templateUrl: 'modules/prices/client/views/list-prices.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      })
+      .state('prices.create', {
+        url: '/create',
+        templateUrl: 'modules/prices/client/views/create-price.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      })
+      .state('prices.view', {
+        url: '/:priceId',
+        templateUrl: 'modules/prices/client/views/view-price.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      })
+      .state('prices.edit', {
+        url: '/:priceId/edit',
+        templateUrl: 'modules/prices/client/views/edit-price.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      });
+  }
+]);
+
+'use strict';
+
+// Prices controller
+angular.module('prices').controller('PricesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Prices', 'Profesionales', 'Services',
+  function ($scope, $stateParams, $location, Authentication, Prices, Profesionales, Services) {
+    $scope.authentication = Authentication;
+    Profesionales.query({},function(results) {
+      $scope.profesionales = results;
+      Services.query({}, function(services) {
+        $scope.services = services;
+      });
+    });
+
+    // Create new Price
+    $scope.create = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'priceForm');
+        return false;
+      }
+
+      var services = [];
+
+      for (var i=0; i<$scope.services.length; i++) {
+        var service = { 'seq': $scope.services[i].seq, 'price': $scope.services[i].price };
+        services.push(service);
+      }
+
+      // Create new Price object
+      var price = new Prices({
+        year: this.year,
+        professional: this.professional,
+        services: services
+      });
+
+      // Redirect after save
+      price.$save(function (response) {
+        $location.path('prices/' + response._id);
+
+        // Clear form fields
+        $scope.year = '';
+        $scope.professional = '';
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Remove existing Price
+    $scope.remove = function (price) {
+      if (price) {
+        price.$remove();
+
+        for (var i in $scope.prices) {
+          if ($scope.prices[i] === price) {
+            $scope.prices.splice(i, 1);
+          }
+        }
+      } else {
+        $scope.price.$remove(function () {
+          $location.path('prices');
+        });
+      }
+    };
+
+    // Update existing Price
+    $scope.update = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'priceForm');
+
+        return false;
+      }
+
+      var price = $scope.price;
+
+      price.$update(function () {
+        $location.path('prices/' + price._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Find a list of Prices
+    $scope.find = function () {
+      $scope.prices = Prices.query({}, function(prices) {
+        Profesionales.query({},function(results) {
+          // Search professional
+          for (var i=0; i<prices.length; i++) {
+            if (prices[i].professional) {
+              for(var k=0; k<results.length; k++) {
+                if (prices[i].professional === results[k]._id) {
+                  prices[i].professional = results[k];
+                }
+              }
+            }
+          }
+        });
+      });
+
+    };
+
+    // Find existing Price
+    $scope.findOne = function () {
+      $scope.price = Prices.get({
+        priceId: $stateParams.priceId
+      }, function() {
+        Services.query({}, function(services) {
+          // Search services
+          for (var i=0; i<$scope.price.services.length; i++) {
+            for (var j=0; j<services.length; j++) {
+              if ($scope.price.services[i].seq === services[j].seq) {
+                $scope.price.services[i].name = services[j].name;
+              }
+            }
+          }
+          // Search professional
+          if ($scope.price.professional) {
+            Profesionales.query({},function(results) {
+              for(var k=0; k<results.length; k++) {
+                if ($scope.price.professional === results[k]._id) {
+                  $scope.price.professional = results[k];
+                }
+              }
+            });
+          }
+        });
+      });
+    };
+  }
+]);
+
+'use strict';
+
+//Prices price used for communicating with the prices REST endpoints
+angular.module('prices').factory('Prices', ['$resource',
+  function ($resource) {
+    return $resource('api/prices/:priceId', {
+      priceId: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]);
+
+'use strict';
+
 // Configuring the Profesionales module
 angular.module('profesionales').run(['Menus',
   function (Menus) {
@@ -1396,6 +1597,149 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
 
 'use strict';
 
+// Setting up route
+angular.module('services').config(['$stateProvider',
+  function ($stateProvider) {
+    // Services state routing
+    $stateProvider
+      .state('services', {
+        abstract: true,
+        url: '/services',
+        template: '<ui-view/>'
+      })
+      .state('services.list', {
+        url: '',
+        templateUrl: 'modules/services/client/views/list-services.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      })
+      .state('services.create', {
+        url: '/create',
+        templateUrl: 'modules/services/client/views/create-service.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      })
+      .state('services.view', {
+        url: '/:serviceId',
+        templateUrl: 'modules/services/client/views/view-service.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      })
+      .state('services.edit', {
+        url: '/:serviceId/edit',
+        templateUrl: 'modules/services/client/views/edit-service.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      });
+  }
+]);
+
+'use strict';
+
+// Services controller
+angular.module('services').controller('ServicesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Services',
+  function ($scope, $stateParams, $location, Authentication, Services) {
+    $scope.authentication = Authentication;
+
+    // Create new Service
+    $scope.create = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'serviceForm');
+
+        return false;
+      }
+
+      // Create new Service object
+      var service = new Services({
+        seq: this.seq,
+        name: this.name
+      });
+
+      // Redirect after save
+      service.$save(function (response) {
+        $location.path('services/' + response._id);
+
+        // Clear form fields
+        $scope.seq = '';
+        $scope.name = '';
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Remove existing Service
+    $scope.remove = function (service) {
+      if (service) {
+        service.$remove();
+
+        for (var i in $scope.services) {
+          if ($scope.services[i] === service) {
+            $scope.services.splice(i, 1);
+          }
+        }
+      } else {
+        $scope.service.$remove(function () {
+          $location.path('services');
+        });
+      }
+    };
+
+    // Update existing Service
+    $scope.update = function (isValid) {
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'serviceForm');
+
+        return false;
+      }
+
+      var service = $scope.service;
+
+      service.$update(function () {
+        $location.path('services/' + service._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Find a list of Services
+    $scope.find = function () {
+      $scope.services = Services.query();
+    };
+
+    // Find existing Service
+    $scope.findOne = function () {
+      $scope.service = Services.get({
+        serviceId: $stateParams.serviceId
+      });
+    };
+  }
+]);
+
+'use strict';
+
+//Services service used for communicating with the services REST endpoints
+angular.module('services').factory('Services', ['$resource',
+  function ($resource) {
+    return $resource('api/services/:serviceId', {
+      serviceId: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]);
+
+'use strict';
+
 // Configuring the Admin module
 angular.module('users.admin').run(['Menus',
   function (Menus) {
@@ -1406,6 +1750,26 @@ angular.module('users.admin').run(['Menus',
     Menus.addSubMenuItem('topbar', 'admin', {
       title: 'Crear usuario',
       state: 'authentication.signup',
+      roles: ['admin']
+    });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Gestión de servicios',
+      state: 'services.list',
+      roles: ['admin']
+    });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Alta de servicio',
+      state: 'services.create',
+      roles: ['admin']
+    });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Gestión de precios',
+      state: 'prices.list',
+      roles: ['admin']
+    });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Alta de precio',
+      state: 'prices.create',
       roles: ['admin']
     });
   }

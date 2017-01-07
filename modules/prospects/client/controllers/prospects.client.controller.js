@@ -125,7 +125,9 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         weddingDate: prospect.weddingDate,
         weddingHour: prospect.weddingHour,
         weddingPlace: prospect.weddingPlace,
-        weddingComments: prospect.weddingComments
+        weddingComments: prospect.weddingComments,
+        // Default - One pack
+        services: [{ 'seq':1,'quantity':1 }]
       });
 
       // Redirect after save

@@ -35,7 +35,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="weddingDate">Fecha de la boda</label>
-          <input name="weddingDate" type="date" ng-model="weddingDateDt" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required ng-change="this.weddingDate = weddingDateDt.toISOString()">
+          <input name="weddingDate" type="date" ng-model="weddingDateDt" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required ng-change="changeWeddingDate()">
           <div ng-messages="noviaForm.weddingDate.$error" role="alert">
             <p class="help-block error-text" ng-message="required">La fecha de la boda es obligatoria.</p>
           </div>
@@ -60,7 +60,7 @@
         </div>
         <div class="form-group">
           <label for="howKnowUs">¿Cómo nos conociste?</label>
-          <select name="howKnowUs" type="select" ng-model="howKnowUs" id="howKnowUs" class="form-control" required>
+          <select name="howKnowUs" type="select" ng-model="howKnowUs" id="howKnowUs" class="form-control">
             <option value="BODAS.NET">BODAS.NET</option>
             <option value="GOOGLE">GOOGLE</option>
             <option value="RRSS (INSTRAGRAM. FACEBOOK. PINTEREST)">RRSS (INTRAGRAM. FACEBOOK. PINTEREST)</option>
@@ -78,28 +78,36 @@
           <label for="instagramUser">Usuario de instagram</label>
           <input name="instagramUser" type="text" ng-model="instagramUser" id="instagramUser" class="form-control" placeholder="Usuario de instagram">
         </div>
-        <div class="form-group" show-errors>
-          <label for="testDate">Fecha de la prueba</label>
-          <input name="testDate" type="date" ng-model="testDateDt" id="testDate" class="form-control" placeholder="Fecha de la prueba" ng-change="this.testDate = testDateDt.toISOString()">
-        </div>
-        <div class="form-group" show-errors>
-          <label for="testHour">Hora de la prueba</label>
-          <input name="testHour" type="text" ng-model="testHour" id="testHour" class="form-control" placeholder="Hora de la prueba">
-        </div>
-        <div class="form-group" show-errors>
-          <label for="testPlace">Lugar de la prueba</label>
-          <input name="testPlace" type="text" ng-model="testPlace" id="testPlace" class="form-control" placeholder="Lugar de la prueba">
-        </div>
-        <div class="form-group">
-          <label for="testComments">Comentarios de la prueba</label>
-          <textarea name="testComments" ng-model="testComments" id="testComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la prueba"></textarea>
-        </div>
         <div ng-show="authentication.user && (authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1)">
+          <div class="form-group" show-errors>
+            <label for="testDate">Fecha de la prueba</label>
+            <input name="testDate" type="date" ng-model="testDateDt" id="testDate" class="form-control" placeholder="Fecha de la prueba" ng-change="this.testDate = testDateDt.toISOString()">
+          </div>
+          <div class="form-group" show-errors>
+            <label for="testHour">Hora de la prueba</label>
+            <input name="testHour" type="text" ng-model="testHour" id="testHour" class="form-control" placeholder="Hora de la prueba">
+          </div>
+          <div class="form-group" show-errors>
+            <label for="testPlace">Lugar de la prueba</label>
+            <input name="testPlace" type="text" ng-model="testPlace" id="testPlace" class="form-control" placeholder="Lugar de la prueba">
+          </div>
+          <div class="form-group">
+            <label for="testComments">Comentarios de la prueba</label>
+            <textarea name="testComments" ng-model="testComments" id="testComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la prueba"></textarea>
+          </div>
           <div class="form-group">
             <label for="professional">Profesional</label>
-            <select name="professional" id="professional" ng-model="professional" class="form-control" >
+            <select name="professional" id="professional" ng-model="professional" class="form-control" ng-change="changeProfessional()">
               <option ng-repeat="profesional in profesionales" value="{{profesional._id}}">
                   {{profesional.name}} {{profesional.surname}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="price">Tarifa</label>
+            <select name="price" id="price" ng-model="price" class="form-control" >
+              <option ng-repeat="price in prices" value="{{price._id}}">
+                  {{price.year}} {{price.professional.name}} {{price.professional.surname}}
               </option>
             </select>
           </div>

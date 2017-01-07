@@ -35,7 +35,7 @@
         </div>
         <div class="form-group" show-errors>
           <label for="weddingDate">Fecha de la boda</label>
-          <input name="weddingDate" type="date" ng-model="novia.weddingDateDt" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required ng-change="novia.weddingDate = novia.weddingDateDt.toISOString()">
+          <input name="weddingDate" type="date" ng-model="novia.weddingDateDt" id="weddingDate" class="form-control" placeholder="Fecha de la boda" required ng-change="updateWeddingDate()">
           <div ng-messages="noviaForm.weddingDate.$error" role="alert">
             <p class="help-block error-text" ng-message="required">La fecha de la boda es obligatoria.</p>
           </div>
@@ -60,7 +60,7 @@
         </div>
         <div class="form-group">
           <label for="howKnowUs">¿Cómo nos conociste?</label>
-          <select name="howKnowUs" type="select" ng-model="novia.howKnowUs" id="howKnowUs" class="form-control" required>
+          <select name="howKnowUs" type="select" ng-model="novia.howKnowUs" id="howKnowUs" class="form-control">
             <option value="BODAS.NET">BODAS.NET</option>
             <option value="GOOGLE">GOOGLE</option>
             <option value="RRSS (INSTRAGRAM. FACEBOOK. PINTEREST)">RRSS (INTRAGRAM. FACEBOOK. PINTEREST)</option>
@@ -98,6 +98,19 @@
           <div class="form-group">
             <label for="professional">Profesional</label>
             <select name="professional" id="professional" class="form-control" data-ng-options="(o.name + ' ' + o.surname) for o in profesionales" data-ng-model="novia.selectedProfessional" ng-change="updateProfessional()"></select>
+          </div>
+          <div class="form-group">
+            <label for="price">Tarifa</label>
+            <select name="price" id="price" class="form-control" data-ng-options="(p.year + ' ' + p.professional.name + ' ' + p.professional.surname) for p in prices" data-ng-model="novia.selectedPrice" ng-change="updatePrice()"></select>
+          </div>
+          <div class="form-group">
+            <label>Servicios</label>
+            <div ng-repeat="service in novia.services">
+              <input name="quantity" type="number" ng-model="service.quantity" id="quantity" class="form-control" placeholder="Cantidad" style="width:10%;display:inline;">
+              <select name="service" id="service" class="form-control" data-ng-options="s.name for s in services" data-ng-model="service.data" ng-change="service.seq = service.data.seq" style="width:50%;display:inline;"></select>
+            </div>
+            <input type="click" value="Añadir servicio" class="btn btn-default" ng-click="addNewService()">
+            <input type="click" value="Eliminar servicio" class="btn btn-default" ng-click="removeService()">
           </div>
         </div>
         <div class="form-group">

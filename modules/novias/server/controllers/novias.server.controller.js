@@ -55,6 +55,8 @@ exports.update = function (req, res) {
   novia.testPlace = req.body.testPlace;
   novia.testComments = req.body.testComments;
   novia.professional = req.body.professional;
+  novia.price = req.body.price;
+  novia.services = req.body.services;
 
   novia.save(function (err) {
     if (err) {

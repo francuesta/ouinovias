@@ -85,6 +85,30 @@
           <div class="col-md-3"><strong>Profesional</strong></div>
           <div class="col-md-6" ng-bind="novia.professionalText"></div>
         </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Tarifa</strong></div>
+          <div class="col-md-6" ng-bind="novia.priceText"></div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Servicios</strong></div>
+          <div class="col-md-6">
+            <span ng-repeat="service in novia.services">
+              {{service.quantity}} - {{service.data.name}}<br/>
+            </span>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Pagos</strong></div>
+          <div class="col-md-6">
+            Total: <span ng-bind="novia.total"></span><br/>
+            Reserva: <span ng-bind="novia.reservation"></span><br/>
+            Prueba: <span ng-bind="novia.testPrice"></span><br/>
+            Boda: <span ng-bind="novia.weddingPrice"></span><br/>
+          </div>
+        </div>
       </div>
     </div>
   </div>

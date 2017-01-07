@@ -59,27 +59,27 @@
         <div class="col-md-3"><strong>Usuario de instagram</strong></div>
         <div class="col-md-6" ng-bind="novia.instagramUser"></div>
       </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Fecha de la prueba</strong></div>
-        <div class="col-md-6" ng-bind="novia.testDate | date:'dd/MM/yyyy'"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Hora de la prueba</strong></div>
-        <div class="col-md-6" ng-bind="novia.testHour"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Lugar de la prueba</strong></div>
-        <div class="col-md-6" ng-bind="novia.testPlace"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Comentarios de la prueba</strong></div>
-        <div class="col-md-6" ng-bind="novia.testComments"></div>
-      </div>
       <div ng-show="authentication.user && (authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1)">
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Fecha de la prueba</strong></div>
+          <div class="col-md-6" ng-bind="novia.testDate | date:'dd/MM/yyyy'"></div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Hora de la prueba</strong></div>
+          <div class="col-md-6" ng-bind="novia.testHour"></div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Lugar de la prueba</strong></div>
+          <div class="col-md-6" ng-bind="novia.testPlace"></div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Comentarios de la prueba</strong></div>
+          <div class="col-md-6" ng-bind="novia.testComments"></div>
+        </div>
         <hr/>
         <div class="row">
           <div class="col-md-3"><strong>Profesional</strong></div>

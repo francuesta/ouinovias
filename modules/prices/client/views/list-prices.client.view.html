@@ -10,7 +10,9 @@
     <a ng-repeat="price in prices" ui-sref="prices.view({priceId: price._id})" class="list-group-item">
       <h4 class="list-group-item-heading">
         <span ng-bind="price.year"></span>
-        <span ng-bind="price.professional.name" ng-show="price.professional"></span>
+        <span ng-show="price.professional">
+        Precios específicos para {{price.professional.name}} {{price.professional.surname}}
+        </span>
       </h4>
     </a>
   </div>

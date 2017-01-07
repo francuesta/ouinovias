@@ -78,23 +78,23 @@
           <label for="instagramUser">Usuario de instagram</label>
           <input name="instagramUser" type="text" ng-model="novia.instagramUser" id="instagramUser" class="form-control" placeholder="Usuario de instagram">
         </div>
-        <div class="form-group" show-errors>
-          <label for="testDate">Fecha de la prueba</label>
-          <input name="testDate" type="date" ng-model="novia.testDateDt" id="testDate" class="form-control" placeholder="Fecha de la prueba" ng-change="novia.testDate = novia.testDateDt.toISOString()">
-        </div>
-        <div class="form-group" show-errors>
-          <label for="testHour">Hora de la prueba</label>
-          <input name="testHour" type="text" ng-model="novia.testHour" id="testHour" class="form-control" placeholder="Hora de la prueba">
-        </div>
-        <div class="form-group" show-errors>
-          <label for="testPlace">Lugar de la prueba</label>
-          <input name="testPlace" type="text" ng-model="novia.testPlace" id="testPlace" class="form-control" placeholder="Lugar de la prueba">
-        </div>
-        <div class="form-group">
-          <label for="testComments">Comentarios de la prueba</label>
-          <textarea name="testComments" ng-model="novia.testComments" id="testComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la prueba"></textarea>
-        </div>
         <div ng-show="authentication.user && (authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1)">
+          <div class="form-group" show-errors>
+            <label for="testDate">Fecha de la prueba</label>
+            <input name="testDate" type="date" ng-model="novia.testDateDt" id="testDate" class="form-control" placeholder="Fecha de la prueba" ng-change="novia.testDate = novia.testDateDt.toISOString()">
+          </div>
+          <div class="form-group" show-errors>
+            <label for="testHour">Hora de la prueba</label>
+            <input name="testHour" type="text" ng-model="novia.testHour" id="testHour" class="form-control" placeholder="Hora de la prueba">
+          </div>
+          <div class="form-group" show-errors>
+            <label for="testPlace">Lugar de la prueba</label>
+            <input name="testPlace" type="text" ng-model="novia.testPlace" id="testPlace" class="form-control" placeholder="Lugar de la prueba">
+          </div>
+          <div class="form-group">
+            <label for="testComments">Comentarios de la prueba</label>
+            <textarea name="testComments" ng-model="novia.testComments" id="testComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la prueba"></textarea>
+          </div>
           <div class="form-group">
             <label for="professional">Profesional</label>
             <select name="professional" id="professional" class="form-control" data-ng-options="(o.name + ' ' + o.surname) for o in profesionales" data-ng-model="novia.selectedProfessional" ng-change="updateProfessional()"></select>

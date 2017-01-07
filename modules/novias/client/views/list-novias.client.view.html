@@ -9,6 +9,9 @@
       </div>
     </div>
   </div>
+  <div class="alert alert-warning text-center" ng-if="novias.$resolved && !novias.length">
+    No se ha dado de alta ninguna novia aún, ¿<a ui-sref="novias.create">creamos una</a>?
+  </div>
   <div class="row">
     <h4>¡¡¡Bodas en breve!!!</h4>
   </div>
@@ -64,8 +67,5 @@
         <i>Sin datos de fecha/lugar</i>
       </p>
     </a>
-  </div>
-  <div class="alert alert-warning text-center" ng-if="novias.$resolved && !novias.length">
-    No se ha dado de alta ninguna novia aún, ¿<a ui-sref="novias.create">creamos una</a>?
   </div>
 </section>

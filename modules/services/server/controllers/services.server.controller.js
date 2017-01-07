@@ -74,7 +74,7 @@ exports.delete = function (req, res) {
  * List of Services
  */
 exports.list = function (req, res) {
-  Service.find().sort('-created').exec(function (err, services) {
+  Service.find().sort({ 'seq':1 }).exec(function (err, services) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

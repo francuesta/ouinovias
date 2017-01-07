@@ -665,7 +665,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         }
       }
     };
-    
+
     $scope.authentication = Authentication;
     if ($scope.authentication.user) {
       Profesionales.query({},function(results) {
@@ -906,51 +906,51 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
             }
             $scope.profesionales = results;
           });
-        }
-        Services.query({},function(resultsServices) {
-          $scope.services = resultsServices;
-          // Look for services for this novia
-          for (var s=0; s<$scope.novia.services.length; s++) {
-            var srvSeq = $scope.novia.services[s].seq;
-            for (var t=0; t<resultsServices.length; t++) {
-              if (resultsServices[t].seq === srvSeq) {
-                $scope.novia.services[s].data = resultsServices[t];
-              }
-            }
-          }
-          Prices.query({}, function(resultsPrices) {
-            // Loop over prices to fill services and professional
-            for (var p=0; p<resultsPrices.length; p++) {
-              setPriceDetails(resultsPrices[p], $scope.profesionales, $scope.services);
-              if (resultsPrices[p]._id === $scope.novia.price) {
-                $scope.novia.priceText = resultsPrices[p].year;
-                if (resultsPrices[p].professional !== undefined) {
-                  $scope.novia.priceText = $scope.novia.priceText + ' ' + resultsPrices[p].professional.name + ' ' + resultsPrices[p].professional.surname;
-                }
-                $scope.novia.selectedPrice = resultsPrices[p];
-              }
-            }
-            $scope.prices = resultsPrices;
-            // Calculate totals
-            var total = 0;
-            for (var z=0; z<$scope.novia.services.length; z++) {
-              var quantity = $scope.novia.services[z].quantity;
-              var tmpSeq = $scope.novia.services[z].seq;
-              var price = 0;
-              for (var w=0; w<$scope.novia.selectedPrice.services.length; w++) {
-                if ($scope.novia.selectedPrice.services[w].seq === tmpSeq) {
-                  price = $scope.novia.selectedPrice.services[w].price;
+          Services.query({},function(resultsServices) {
+            $scope.services = resultsServices;
+            // Look for services for this novia
+            for (var s=0; s<$scope.novia.services.length; s++) {
+              var srvSeq = $scope.novia.services[s].seq;
+              for (var t=0; t<resultsServices.length; t++) {
+                if (resultsServices[t].seq === srvSeq) {
+                  $scope.novia.services[s].data = resultsServices[t];
                 }
               }
-              total = total + (price*quantity);
             }
-            $scope.novia.total = total;
-            $scope.novia.reservation = total/3;
-            $scope.novia.testPrice = total/3;
-            $scope.novia.weddingPrice = total/3;
-            console.log('Price: ' + $scope.novia.selectedPrice.year);
+            Prices.query({}, function(resultsPrices) {
+              // Loop over prices to fill services and professional
+              for (var p=0; p<resultsPrices.length; p++) {
+                setPriceDetails(resultsPrices[p], $scope.profesionales, $scope.services);
+                if (resultsPrices[p]._id === $scope.novia.price) {
+                  $scope.novia.priceText = resultsPrices[p].year;
+                  if (resultsPrices[p].professional !== undefined) {
+                    $scope.novia.priceText = $scope.novia.priceText + ' ' + resultsPrices[p].professional.name + ' ' + resultsPrices[p].professional.surname;
+                  }
+                  $scope.novia.selectedPrice = resultsPrices[p];
+                }
+              }
+              $scope.prices = resultsPrices;
+              // Calculate totals
+              var total = 0;
+              for (var z=0; z<$scope.novia.services.length; z++) {
+                var quantity = $scope.novia.services[z].quantity;
+                var tmpSeq = $scope.novia.services[z].seq;
+                var price = 0;
+                for (var w=0; w<$scope.novia.selectedPrice.services.length; w++) {
+                  if ($scope.novia.selectedPrice.services[w].seq === tmpSeq) {
+                    price = $scope.novia.selectedPrice.services[w].price;
+                  }
+                }
+                total = total + (price*quantity);
+              }
+              $scope.novia.total = total;
+              $scope.novia.reservation = total/3;
+              $scope.novia.testPrice = total/3;
+              $scope.novia.weddingPrice = total/3;
+              console.log('Price: ' + $scope.novia.selectedPrice.year);
+            });
           });
-        });
+        }
       });
     };
   }

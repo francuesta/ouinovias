@@ -908,6 +908,22 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
                 $scope.novia.selectedProfessional = results[i];
               }
             }
+            // Look for services for this novia
+            for (var s=0; s<$scope.novia.services.length; s++) {
+              var prfId = $scope.novia.services[s].professional;
+              if (prfId === undefined) {
+                prfId = $scope.novia.professional;
+              }
+              if (prfId !== undefined) {
+                for (var m=0; m<results.length; m++) {
+                  if (results[m]._id === prfId) {
+                    $scope.novia.services[s].professionalText = results[m].name + ' ' + results[m].surname;
+                  }
+                }
+              } else {
+                $scope.novia.services[s].professionalText = 'Profesional NO definido aún';
+              }
+            }
             $scope.profesionales = results;
           });
           Services.query({},function(resultsServices) {
@@ -954,7 +970,6 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
               $scope.novia.reservation = total/3;
               $scope.novia.testPrice = total/3;
               $scope.novia.weddingPrice = total/3;
-              console.log('Price: ' + $scope.novia.selectedPrice.year);
             });
           });
         }

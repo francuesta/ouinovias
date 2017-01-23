@@ -98,7 +98,11 @@ var NoviaSchema = new Schema({
   services: [
     {
       seq: Number,
-      quantity: Number
+      quantity: Number,
+      professional: {
+        type : Schema.ObjectId, 
+        ref : 'Profesional'
+      }
     }
   ],
   displacement: {

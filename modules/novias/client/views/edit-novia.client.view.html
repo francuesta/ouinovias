@@ -112,8 +112,9 @@
           <div class="form-group">
             <label>Servicios</label>
             <div ng-repeat="service in novia.services">
-              <input name="quantity" type="number" ng-model="service.quantity" id="quantity" class="form-control" placeholder="Cantidad" style="width:10%;display:inline;">
-              <select name="service" id="service" class="form-control" data-ng-options="s.name for s in services" data-ng-model="service.data" ng-change="service.seq = service.data.seq" style="width:50%;display:inline;"></select>
+              <input name="quantity" type="number" ng-model="service.quantity" id="quantity" class="form-control" placeholder="Cantidad" style="width:5%;display:inline;">
+              <select name="service" id="service" class="form-control" data-ng-options="s.name for s in services" data-ng-model="service.data" ng-change="service.seq = service.data.seq" style="width:40%;display:inline;"></select>
+              <select name="professional" id="professional" class="form-control" data-ng-options="(o.name + ' ' + o.surname) for o in profesionales" data-ng-model="service.professional" style="width:50%;display:inline;"></select>
             </div>
             <input type="click" value="Añadir servicio" class="btn btn-default" ng-click="addNewService()">
             <input type="click" value="Eliminar servicio" class="btn btn-default" ng-click="removeService()">

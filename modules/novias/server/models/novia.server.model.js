@@ -42,6 +42,9 @@ var NoviaSchema = new Schema({
   weddingHour: {
     type: String
   },
+  weddingCitation: {
+    type: String
+  },
   weddingPlace: {
     type: String,
     default: '',
@@ -98,6 +101,10 @@ var NoviaSchema = new Schema({
       quantity: Number
     }
   ],
+  displacement: {
+    type: Number,
+    default: 0
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

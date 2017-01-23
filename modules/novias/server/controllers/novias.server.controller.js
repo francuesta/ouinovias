@@ -44,6 +44,7 @@ exports.update = function (req, res) {
   novia.phone = req.body.phone;
   novia.email = req.body.email;
   novia.weddingDate = req.body.weddingDate;
+  novia.weddingCitation = req.body.weddingCitation;
   novia.weddingHour = req.body.weddingHour;
   novia.weddingPlace = req.body.weddingPlace;
   novia.weddingComments = req.body.weddingComments;
@@ -57,6 +58,7 @@ exports.update = function (req, res) {
   novia.professional = req.body.professional;
   novia.price = req.body.price;
   novia.services = req.body.services;
+  novia.displacement = req.body.displacement;
 
   novia.save(function (err) {
     if (err) {

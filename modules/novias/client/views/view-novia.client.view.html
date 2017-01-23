@@ -34,6 +34,13 @@
         <div class="col-md-3"><strong>Hora de la boda</strong></div>
         <div class="col-md-6" ng-bind="novia.weddingHour"></div>
       </div>
+      <div ng-show="authentication.user && (authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1)">
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Hora de la cita</strong></div>
+          <div class="col-md-6" ng-bind="novia.weddingCitation"></div>
+        </div>
+      </div>
       <hr/>
       <div class="row">
         <div class="col-md-3"><strong>Lugar de la boda</strong></div>
@@ -98,6 +105,11 @@
               {{service.quantity}} - {{service.data.name}}<br/>
             </span>
           </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"><strong>Desplazamiento</strong></div>
+          <div class="col-md-6" ng-bind="novia.displacement"></div>
         </div>
         <hr/>
         <div class="row">

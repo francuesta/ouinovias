@@ -76,6 +76,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         email: this.email,
         weddingDate: this.weddingDate,
         weddingHour: this.weddingHour,
+        weddingCitation: this.weddingCitation,
         weddingPlace: this.weddingPlace,
         weddingComments: this.weddingComments,
         howKnowUs: this.howKnowUs,
@@ -87,7 +88,8 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         testComments: this.testComments,
         professional: this.professional,
         price: this.price,
-        services: [{ 'seq':1,'quantity':1 }]
+        services: [{ 'seq':1,'quantity':1 }],
+        displacement: this.displacement
       });
 
       // Redirect after save
@@ -102,6 +104,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.weddingDate = '';
         $scope.weddingDateDt = '';
         $scope.weddingHour = '';
+        $scope.weddingCitation = '';
         $scope.weddingPlace = '';
         $scope.weddingComments = '';
         $scope.howKnowUs = '';
@@ -114,6 +117,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.testComments = '';
         $scope.professional = '';
         $scope.price = '';
+        $scope.displacement = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

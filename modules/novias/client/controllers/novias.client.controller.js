@@ -168,10 +168,10 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         var priceForProfessionalAndYear;
         var priceForYear;
         for (var i=0; i<$scope.prices.length; i++) {
-          if (year === $scope.prices[i].year && $scope.prices[i].professional === undefined) {
+          if (year === $scope.prices[i].year && $scope.prices[i].professional === undefined && $scope.prices[i].discount === undefined) {
             priceForYear = $scope.prices[i];
           }
-          if (year === $scope.prices[i].year && $scope.prices[i].professional !== undefined && $scope.prices[i].professional._id === professionalId) {
+          if (year === $scope.prices[i].year && $scope.prices[i].professional !== undefined && $scope.prices[i].professional._id === professionalId && $scope.prices[i].discount === undefined) {
             priceForProfessionalAndYear = $scope.prices[i];
           }
         }
@@ -287,6 +287,9 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
                   $scope.novia.priceText = resultsPrices[p].year;
                   if (resultsPrices[p].professional !== undefined) {
                     $scope.novia.priceText = $scope.novia.priceText + ' ' + resultsPrices[p].professional.name + ' ' + resultsPrices[p].professional.surname;
+                  }
+                  if (resultsPrices[p].discount !== undefined) {
+                    $scope.novia.priceText = $scope.novia.priceText + ' (Descuento ' + resultsPrices[p].discount + ')';
                   }
                   $scope.novia.selectedPrice = resultsPrices[p];
                 }

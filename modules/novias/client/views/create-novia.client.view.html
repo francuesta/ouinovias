@@ -113,7 +113,7 @@
             <label for="price">Tarifa</label>
             <select name="price" id="price" ng-model="price" class="form-control" >
               <option ng-repeat="price in prices" value="{{price._id}}">
-                  {{price.year}} {{price.professional.name}} {{price.professional.surname}}
+                  {{price.year}} {{price.professional.name}} {{price.professional.surname}} {{price.discount}}
               </option>
             </select>
           </div>

@@ -40,6 +40,7 @@ exports.update = function (req, res) {
   var price = req.price;
 
   price.year = req.body.year;
+  price.discount = req.body.discount;
   price.professional = req.body.professional;
   price.services = req.body.services;
 

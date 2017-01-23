@@ -20,6 +20,10 @@
             </option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="discount">Descuento</label>
+          <input name="discount" ng-model="discount" id="discount" class="form-control" placeholder="Descuento">
+        </div>
         <div class="form-group" ng-repeat="service in services">
           <label for="prices{{service.seq}}">{{service.name}}</label>
           <input name="prices{{service.seq}}" type="number" ng-model="service.price" id="price{{service.seq}}" class="form-control" placeholder="{{service.name}}" required>

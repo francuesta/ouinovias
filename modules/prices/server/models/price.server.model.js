@@ -15,6 +15,10 @@ var PriceSchema = new Schema({
     trim: true,
     required: 'Año es obligatorio'
   },
+  discount: {
+    type: String,
+    trim: true
+  },
   professional: {
     type : Schema.ObjectId, 
     ref : 'Profesional'

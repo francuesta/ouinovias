@@ -107,7 +107,7 @@
           </div>
           <div class="form-group">
             <label for="price">Tarifa</label>
-            <select name="price" id="price" class="form-control" data-ng-options="(p.year + ' ' + p.professional.name + ' ' + p.professional.surname) for p in prices" data-ng-model="novia.selectedPrice" ng-change="updatePrice()"></select>
+            <select name="price" id="price" class="form-control" data-ng-options="(p.year + ' ' + p.professional.name + ' ' + p.professional.surname + ' ' + p.discount) for p in prices" data-ng-model="novia.selectedPrice" ng-change="updatePrice()"></select>
           </div>
           <div class="form-group">
             <label>Servicios</label>

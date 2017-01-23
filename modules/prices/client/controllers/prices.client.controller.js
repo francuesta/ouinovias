@@ -31,6 +31,7 @@ angular.module('prices').controller('PricesController', ['$scope', '$stateParams
       var price = new Prices({
         year: this.year,
         professional: this.professional,
+        discount: this.discount,
         services: services
       });
 
@@ -41,6 +42,7 @@ angular.module('prices').controller('PricesController', ['$scope', '$stateParams
         // Clear form fields
         $scope.year = '';
         $scope.professional = '';
+        $scope.discount = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

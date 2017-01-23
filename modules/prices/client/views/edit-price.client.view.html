@@ -6,7 +6,7 @@
     <form name="priceForm" class="form-horizontal" ng-submit="update(priceForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <span ng-bind="price.year"></span> <span ng-bind="price.professional.name" ng-show="price.professional"></span>
+          <span ng-bind="price.year"></span> <span ng-bind="price.professional.name" ng-show="price.professional"></span> <span ng-bind="price.discount" ng-show="price.discount"></span>
         </div>
         <div class="form-group" ng-repeat="service in price.services">
           <label for="prices{{service.seq}}">{{service.name}}</label>

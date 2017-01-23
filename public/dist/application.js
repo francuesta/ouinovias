@@ -686,8 +686,8 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
     var setFlags = function(novia) {
       var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
       var now = new Date();
-      var diffWeddingDays = Math.ceil(Math.abs((new Date(novia.weddingDate).getTime() - now.getTime())/(oneDay)));
-      var diffTestDays = Math.ceil(Math.abs((new Date(novia.testDate).getTime() - now.getTime())/(oneDay)));
+      var diffWeddingDays = Math.ceil((new Date(novia.weddingDate).getTime() - now.getTime())/(oneDay));
+      var diffTestDays = Math.ceil((new Date(novia.testDate).getTime() - now.getTime())/(oneDay));
       if (diffTestDays > 0 && diffTestDays < 15) {
         novia.imminentTest = true;
       } else {

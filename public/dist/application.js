@@ -700,6 +700,23 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
       }
     };
 
+    var setDates = function(novia) {
+      var days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"];
+      var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+      if (novia.testDate !== undefined) {
+        var testDate = new Date(novia.testDate);
+        var dayOfWeek = testDate.getDay();
+        var month = testDate.getMonth();
+        novia.testDateText = days[dayOfWeek] + ', ' + testDate.getDate() + ' de ' + months[month] + ' de ' + testDate.getFullYear();
+      }
+      if (novia.weddingDate !== undefined) {
+        var weddingDate = new Date(novia.weddingDate);
+        var weddingDayOfWeek = weddingDate.getDay();
+        var weddingMonth = weddingDate.getMonth();
+        novia.weddingDateText = days[weddingDayOfWeek] + ', ' + weddingDate.getDate() + ' de ' + months[weddingMonth] + ' de ' + weddingDate.getFullYear();
+      }
+    };
+
     // Create new Novia
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -900,6 +917,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.novia.weddingDateDt = new Date($scope.novia.weddingDate);
         $scope.novia.testDateDt = new Date($scope.novia.testDate);
         setFlags($scope.novia);
+        setDates($scope.novia);
         if ($scope.authentication.user) {
           Profesionales.query({},function(results) {
             for (var i=0; i<results.length; i++) {

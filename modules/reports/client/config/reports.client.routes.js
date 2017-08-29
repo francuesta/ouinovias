@@ -10,9 +10,16 @@ angular.module('reports').config(['$stateProvider',
         url: '/reports',
         template: '<ui-view/>'
       })
-      .state('reports.list', {
+      .state('reports.year', {
         url: '',
-        templateUrl: 'modules/reports/client/views/list-reports.client.view.html',
+        templateUrl: 'modules/reports/client/views/list-reports-year.client.view.html',
+        data: {
+          roles: ['admin']
+        }
+      })
+      .state('reports.prof', {
+        url: '',
+        templateUrl: 'modules/reports/client/views/list-reports-prof.client.view.html',
         data: {
           roles: ['admin']
         }

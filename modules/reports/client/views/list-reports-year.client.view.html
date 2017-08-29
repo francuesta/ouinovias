@@ -1,0 +1,23 @@
+<section ng-controller="ReportsController" ng-init="findYear()">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Por año y mes</h1>
+      </div>
+    </div>
+  </div>
+  <div class="list-group" ng-repeat="year in reports.byYearAndMonth" class="list-group-item">
+	  <h4 class="list-group-item-heading">
+	    <span ng-bind="year.id"></span> - Total Eventos: <span class="list-group-item-heading" ng-bind="year.novias"></span>
+	  </h4>
+    <p class="list-group-item-text" ng-repeat="service in year.services">
+      - <span ng-bind="service.text"></span>: <span class="list-group-item-heading" ng-bind="service.number"></span>
+    </p>
+	  <div class="list-group-item-text" ng-repeat="month in year.months">
+	    <strong><span ng-bind="month.text"></span>: <span class="list-group-item-heading" ng-bind="month.novias"></span></strong>
+      <p class="list-group-item-text" ng-repeat="service in month.services">
+      - <span ng-bind="service.text"></span>: <span class="list-group-item-heading" ng-bind="service.number"></span>
+    </p>
+	  </div>
+  </div>
+</section>

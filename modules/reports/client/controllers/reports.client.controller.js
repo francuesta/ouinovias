@@ -82,15 +82,17 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
       obj.novias = obj.novias+1;
       // Loop over novia services
       for (var i=0; i<novia.services.length; i++) {
-        // Check if service exists
-        var service = _searchById(novia.services[i].seq, obj.services);
-        if (service === null) {
-          // Create service if not exists
-          service = { 'id': novia.services[i].seq, 'text': _searchServiceText(novia.services[i].seq), 'number': 0 };
-          obj.services.push(service);
+        if (novia.services[i].quantity > 0) {
+          // Check if service exists
+          var service = _searchById(novia.services[i].seq, obj.services);
+          if (service === null) {
+            // Create service if not exists
+            service = { 'id': novia.services[i].seq, 'text': _searchServiceText(novia.services[i].seq), 'number': 0 };
+            obj.services.push(service);
+          }
+          // Increase number of services
+          service.number = service.number + novia.services[i].quantity;
         }
-        // Increase number of services
-        service.number = service.number + novia.services[i].quantity;
       }
     };
 

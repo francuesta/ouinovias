@@ -14,6 +14,10 @@
       <h4 class="list-group-item-heading">
         <span ng-bind="prospect.name"></span> <span class="list-group-item-heading" ng-bind="prospect.surname"></span>
       </h4>
+      <p class="list-group-item-text" ng-if="prospect.billingDate != null">
+        Presupuesto enviado el día
+        <span ng-bind="prospect.billingDate | date:'dd/MM/yyyy'"></span>
+      </p>
       <p class="list-group-item-text" ng-if="prospect.weddingDate != null">
         Se casa el día
         <span ng-bind="prospect.weddingDate | date:'dd/MM/yyyy'"></span>

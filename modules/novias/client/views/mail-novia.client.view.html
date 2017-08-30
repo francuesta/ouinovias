@@ -19,7 +19,7 @@
   <div class="col-md-8">
     <h4>Prueba {{novia.name}} - {{novia.testDate | date:"dd/MM/yyyy"}} - {{novia.testPlace}}</h4>
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9" style="font-family: Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif">
         <strong><u>{{novia.testHour}} PRUEBA DE {{novia.name}} {{novia.surname}}</u></strong>
         <br/><br/>
         TLF {{novia.name}} - {{novia.phone}}.
@@ -51,10 +51,12 @@
   <div class="col-md-8" style="padding-top:40px">
     <h4>Boda de {{novia.name}} - {{novia.weddingDate | date:"dd/MM/yyyy"}} - {{novia.weddingPlace}}</h4>
     <div class="row">
-      <div class="col-md-9">
-        Buenos días 
+      <div class="col-md-9" style="font-family: Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif">
+        Buenos días {{novia.name}},
         <br/><br/>
-        Ya lo tenemos todo organizado a la perfección, así que fuera nervios y a disfrutar tus últimas horas de soltera!
+        ¿Nerviosa? No te preocupes porque estás en las mejores manos. 
+        <br/><br/>
+        Ya lo tenemos todo organizado a la perfección, así que fuera nervios y a disfrutar tus últimos días de soltera!
         <br/><br/>
         No tengo ninguna duda que todo va a salir genial.
         <br/><br/>
@@ -62,16 +64,7 @@
         <br/><br/>
         <strong>Revisa todos los datos y confírmame que esté todo correcto.</strong>
         <br/><br/>
-        Os deseamos un día cargado de amor, felicidad y grandes momentos que guardarás en tu retina para siempre!
-        <br/><br/>
-        No olvidéis mandarnos fotos! Que nos hace mucha ilusión veros radiantes vestidas de blanco!
-        <br/><br/>
-        Cualquier cosita no dudes en llamarme o mandarme un mail.
-        <br/><br/>
-        Muchas gracias por contar con nosotros!
-        <br/><br/>
-        Besos y abrazos,
-        <br/><br/>
+        <center>
         <strong><u>{{novia.weddingCitation}} BODA DE {{novia.name}} {{novia.surname}}</u></strong>
         <br/><br/>
         TLF {{novia.name}} - {{novia.phone}}.
@@ -84,7 +77,7 @@
         <br/><br/>
         {{novia.weddingPlace}}
         <br/><br/>
-        <strong>HORA</strong>
+        <strong>HORA DE LLEGADA DEL ESTILISTA</strong>
         <br/><br/>
         {{novia.weddingCitation}}
         <br/><br/>
@@ -94,9 +87,20 @@
           <span ng-show="service.quantity > 1">{{service.quantity}} </span>{{service.data.name}}<br/>
         </span>
         <br/>
-        <strong>A PAGAR <span style="color: #DF013A">{{novia.weddingPrice}} €</span></strong>
+        <strong>A pagar <span style="color: #DF013A">{{novia.weddingPrice}} €</span></strong>
         <br/><br/>
         <span style="color: #DF013A">**Abonar en efectivo al profesional al finalizar el servicio.**</span>
+        </center>
+        <br/><br/>
+        Os deseamos un día cargado de amor, felicidad y grandes momentos!
+        <br/><br/>
+        No olvides mandarnos fotos! Que nos hace mucha ilusión verte radiante vestida de novia!
+        <br/><br/>
+        Cualquier cosita no dudes en llamarme o mandarme un mail.
+        <br/><br/>
+        Muchas gracias por confiar en nosotros!
+        <br/><br/>
+        Besos y abrazos,
       </div>
     </div>
   </div>

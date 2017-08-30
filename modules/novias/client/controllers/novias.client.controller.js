@@ -343,9 +343,9 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
                 total = total + (price*quantity);
               }
               $scope.novia.total = total;
-              $scope.novia.reservation = total/3;
-              $scope.novia.testPrice = total/3;
-              $scope.novia.weddingPrice = total/3;
+              $scope.novia.reservation = Math.round(total/3*100)/100;
+              $scope.novia.testPrice = Math.round(total/3*100)/100;
+              $scope.novia.weddingPrice = Math.round(total/3*100)/100;
             });
           });
         }

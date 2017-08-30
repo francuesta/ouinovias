@@ -43,6 +43,10 @@
           <label for="weddingComments">Comentarios de la boda</label>
           <textarea name="weddingComments" ng-model="prospect.weddingComments" id="weddingComments" class="form-control" cols="30" rows="3" placeholder="Comentarios de la boda"></textarea>
         </div>
+        <div class="form-group" show-errors>
+          <label for="billingDate">Fecha envío presupuesto</label>
+          <input name="billingDate" type="date" ng-model="prospect.billingDateDt" id="billingDate" class="form-control" placeholder="Fecha envío presupuesto" ng-change="prospect.billingDate = prospect.billingDateDt.toISOString()">
+        </div>
         <div class="form-group">
           <input type="submit" value="Actualizar" class="btn btn-default">
         </div>

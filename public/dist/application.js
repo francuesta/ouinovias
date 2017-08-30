@@ -1500,7 +1500,8 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         weddingDate: this.weddingDate,
         weddingHour: this.weddingHour,
         weddingPlace: this.weddingPlace,
-        weddingComments: this.weddingComments
+        weddingComments: this.weddingComments,
+        billingDate: this.billingDate
       });
 
       // Redirect after save
@@ -1517,6 +1518,8 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         $scope.weddingHour = '';
         $scope.weddingPlace = '';
         $scope.weddingComments = '';
+        $scope.billingDate = '';
+        $scope.billingDateDt = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -1585,6 +1588,7 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         prospectId: $stateParams.prospectId
       }, function() {
         $scope.prospect.weddingDateDt = new Date($scope.prospect.weddingDate);
+        $scope.prospect.billingDateDt = new Date($scope.prospect.billingDate);
       });
     };
 
@@ -1618,6 +1622,8 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         $scope.weddingHour = '';
         $scope.weddingPlace = '';
         $scope.weddingComments = '';
+        $scope.billingDate = '';
+        $scope.billingDateDt = '';
         // Update prospect reference
         prospect.bride = response._id;
         prospect.$update(function () {

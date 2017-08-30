@@ -52,6 +52,11 @@
         <div class="col-md-3"><strong>Comentarios de la boda</strong></div>
         <div class="col-md-6" ng-bind="prospect.weddingComments"></div>
       </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Fecha envío presupuesto</strong></div>
+        <div class="col-md-6" ng-bind="prospect.billingDate | date:'dd/MM/yyyy'"></div>
+      </div>
     </div>
   </div>
 </section>

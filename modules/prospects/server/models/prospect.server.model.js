@@ -59,6 +59,9 @@ var ProspectSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  billingDate: {
+    type: String
   }
 });
 

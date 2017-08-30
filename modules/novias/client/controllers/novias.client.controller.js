@@ -59,8 +59,8 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
     };
 
     var setDates = function(novia) {
-      var days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"];
-      var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+      var days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
+      var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
       if (novia.testDate !== undefined) {
         var testDate = new Date(novia.testDate);
         var dayOfWeek = testDate.getDay();

@@ -8,10 +8,13 @@
   </div>
   <div class="list-group" ng-repeat="professional in reports.byProfessionalAndYear" class="list-group-item">
 	  <h4 class="list-group-item-heading">
-	    <span ng-bind="professional.text"></span> - Total: <span class="list-group-item-heading" ng-bind="professional.novias.length"></span>
+	    <span ng-bind="professional.text"></span>
 	  </h4>
-	  <p class="list-group-item-text" ng-repeat="year in professional.years">
-	    <span ng-bind="year.year"></span>: <span class="list-group-item-heading" ng-bind="year.novias.length"></span>
-	  </p>
+	  <div class="list-group-item-text" ng-repeat="year in professional.years">
+	    <strong><span ng-bind="year.id"></span>: <span class="list-group-item-heading" ng-bind="year.brides"></span> Eventos</strong>
+      <p class="list-group-item-text" ng-repeat="service in year.services">
+        - <span ng-bind="service.text"></span>: <span class="list-group-item-heading" ng-bind="service.number"></span>
+      </p>
+	  </div>
   </div>
 </section>

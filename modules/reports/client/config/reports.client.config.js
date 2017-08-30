@@ -13,14 +13,14 @@ angular.module('reports').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'reports', {
-      title: 'Por año y mes',
+      title: 'Año y mes',
       state: 'reports.year',
       roles: ['admin']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'reports', {
-      title: 'Por profesional y año',
+      title: 'Profesional y año',
       state: 'reports.prof',
       roles: ['admin']
     });

@@ -11,14 +11,14 @@ angular.module('reports').config(['$stateProvider',
         template: '<ui-view/>'
       })
       .state('reports.year', {
-        url: '',
+        url: '/years',
         templateUrl: 'modules/reports/client/views/list-reports-year.client.view.html',
         data: {
           roles: ['admin']
         }
       })
       .state('reports.prof', {
-        url: '',
+        url: '/professionals',
         templateUrl: 'modules/reports/client/views/list-reports-prof.client.view.html',
         data: {
           roles: ['admin']

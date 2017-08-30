@@ -27,7 +27,7 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
 
     var _sortByKey = function(key,desc) {
       return function(a,b){
-        return desc ? ~~(a[key] - b[key]) : ~~(b[key] - a[key]);
+        return desc ? ~~(b[key] - a[key]) : ~~(a[key] - b[key]);
       };
     };
 

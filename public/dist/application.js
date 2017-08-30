@@ -1735,7 +1735,7 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
 
     var _sortByKey = function(key,desc) {
       return function(a,b){
-        return desc ? ~~(a[key] < b[key]) : ~~(a[key] > b[key]);
+        return desc ? ~~(a[key] - b[key]) : ~~(b[key] - a[key]);
       };
     };
 
@@ -1814,10 +1814,8 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
         // Loop over services
         for (var i=0; i<bride.services.length; i++) {
           var serviceProfId = bride.professional;
-          console.log('Prof novia ' + serviceProfId);
           if (bride.services[i].professional) {
             serviceProfId = bride.services[i].professional;
-            console.log('Prof servicio ' + serviceProfId);
           }
           var tmpBride = { 'services': [bride.services[i]] };
           // Search for professional

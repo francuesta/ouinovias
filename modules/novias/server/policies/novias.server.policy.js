@@ -35,6 +35,9 @@ exports.invokeRolesPolicies = function () {
     allows: [{
       resources: '/api/novias/:noviaId',
       permissions: '*'
+    }, {
+      resources: '/api/novias',
+      permissions: 'post'
     }]
   }]);
 };

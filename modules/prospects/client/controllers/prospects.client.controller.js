@@ -25,7 +25,8 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         weddingHour: this.weddingHour,
         weddingPlace: this.weddingPlace,
         weddingComments: this.weddingComments,
-        billingDate: this.billingDate
+        billingDate: this.billingDate,
+        rejected: false
       });
 
       // Redirect after save
@@ -87,8 +88,14 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
 
     // Find a list of Prospects
     $scope.find = function () {
-      $scope.prospectsFull = Prospects.query();
-      $scope.prospects = $scope.prospectsFull;
+      Prospects.query({}, function(results) {
+        $scope.prospectsFull = results;
+        // Loop over array to search next events
+        for (var i=0; i<$scope.prospectsFull.length; i++) {
+          setFlags($scope.prospectsFull[i]);
+        }
+        $scope.prospects = $scope.prospectsFull;
+      });
     };
 
     // Filter a list of Prospects
@@ -159,6 +166,29 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+    };
+
+    // Prospect rejected
+    $scope.reject = function(prospect) {
+      $scope.error = null;
+
+      prospect.rejected = true;
+
+      prospect.$update(function () {
+        $location.path('prospects/' + prospect._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    var setFlags = function(prospect) {
+      if (prospect.billingDate) {
+        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+        var now = new Date();
+        prospect.daysFromBilling = Math.ceil((now.getTime() - new Date(prospect.billingDate).getTime())/(oneDay));
+      } else {
+        prospect.daysFromBilling = -1;
+      }
     };
   }
 ]);

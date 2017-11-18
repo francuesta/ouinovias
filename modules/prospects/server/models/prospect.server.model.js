@@ -62,6 +62,10 @@ var ProspectSchema = new Schema({
   },
   billingDate: {
     type: String
+  },
+  rejected: {
+    type: Boolean,
+    default: false
   }
 });
 

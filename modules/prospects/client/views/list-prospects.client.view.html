@@ -9,25 +9,53 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <h4>Pendiente de enviar presupuesto</h4>
+  </div>
   <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item">
-      <h4 class="list-group-item-heading">
-        <span ng-bind="prospect.name"></span> <span class="list-group-item-heading" ng-bind="prospect.surname"></span>
-      </h4>
-      <p class="list-group-item-text" ng-if="prospect.billingDate != null">
-        Presupuesto enviado el día
-        <span ng-bind="prospect.billingDate | date:'dd/MM/yyyy'"></span>
-      </p>
-      <p class="list-group-item-text" ng-if="prospect.weddingDate != null">
-        Se casa el día
-        <span ng-bind="prospect.weddingDate | date:'dd/MM/yyyy'"></span>
-        en
-        <span ng-bind="prospect.weddingPlace"></span>
-      </p>
-      <p class="list-group-item-text" ng-if="prospect.weddingDate == null">
-        <i>Sin datos de fecha/lugar</i>
-      </p>
-    </a>
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate == null" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+  </div>
+  <div class="row">
+    <h4>Presupuesto enviado hoy</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 0" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+  </div>
+  <div class="row">
+    <h4>Presupuesto enviado hace 1 día</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 1" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+  </div>
+  <div class="row">
+    <h4>Presupuesto enviado hace 2 días</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 2" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+  </div>
+  <div class="row">
+    <h4>Presupuesto enviado hace 3 días</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 3" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+  </div>
+  <div class="row">
+    <h4>Presupuesto enviado hace más de 3 días</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling > 3" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+  </div>
+  <div class="row">
+    <h4>Ya contratadas</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride != null" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+  </div>
+  <div class="row">
+    <h4>Rechazadas</h4>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.rejected" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
   </div>
   <div class="alert alert-warning text-center" ng-if="prospects.$resolved && !prospects.length">
     No hay datos aún, ¿<a ui-sref="prospects.create">Lo creamos</a>?

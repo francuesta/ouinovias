@@ -49,6 +49,7 @@ exports.update = function (req, res) {
   prospect.weddingComments = req.body.weddingComments;
   prospect.billingDate = req.body.billingDate;
   prospect.bride = req.body.bride;
+  prospect.rejected = req.body.rejected;
 
   prospect.save(function (err) {
     if (err) {

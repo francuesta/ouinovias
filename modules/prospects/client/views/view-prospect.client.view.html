@@ -9,14 +9,25 @@
     <a class="btn btn-primary" ng-click="remove()" ng-show="authentication.user.roles.indexOf('admin')!=-1">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
-    <a class="btn btn-primary" ng-click="convert(prospect)" ng-show="(authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1) && prospect.bride == null">
+    <a class="btn btn-primary" ng-click="convert(prospect)" ng-show="(authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1) && prospect.bride == null && !prospect.rejected">
       <i class="glyphicon glyphicon-usd"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="reject(prospect)" ng-show="(authentication.user.roles.indexOf('admin')!=-1 || authentication.user.roles.indexOf('user')!=-1) && prospect.bride == null && !prospect.rejected">
+      <i class="glyphicon glyphicon-remove"></i>
     </a>
   </div>
   <div class="row" ng-if="prospect.bride">
     <div class="col-md-8">
       <div class="row">
         <h2>¡¡¡Ya ha contratado, <a ui-sref="novias.view({noviaId: prospect.bride})">esta es su información</a>!!!</h2>
+      </div>
+      <hr/>
+    </div>
+  </div>
+  <div class="row" ng-if="prospect.rejected">
+    <div class="col-md-8">
+      <div class="row">
+        <h2>¡¡¡Contratación rechazada!!!</h2>
       </div>
       <hr/>
     </div>

@@ -10,54 +10,21 @@
     </div>
   </div>
   <div class="row">
-    <h4>Pendiente de enviar presupuesto</h4>
+    <h4>En curso</h4>
   </div>
   <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate == null" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.daysFromBilling < 7" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
   </div>
   <div class="row">
-    <h4>Presupuesto enviado hoy</h4>
+    <h4>Presupuesto enviado hace 7 días o más</h4>
   </div>
   <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 0" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.daysFromBilling >= 7 && prospect.daysFromBilling < 14" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
   </div>
   <div class="row">
-    <h4>Presupuesto enviado hace 1 día</h4>
+    <h4>Presupuesto enviado hace 14 días o más</h4>
   </div>
   <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 1" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
-  </div>
-  <div class="row">
-    <h4>Presupuesto enviado hace 2 días</h4>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 2" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
-  </div>
-  <div class="row">
-    <h4>Presupuesto enviado hace 3 días</h4>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling == 3" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
-  </div>
-  <div class="row">
-    <h4>Presupuesto enviado hace más de 3 días</h4>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride == null && !prospect.rejected && prospect.billingDate != null && prospect.daysFromBilling > 3" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
-  </div>
-  <div class="row">
-    <h4>Ya contratadas</h4>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.bride != null" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
-  </div>
-  <div class="row">
-    <h4>Rechazadas</h4>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.rejected" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
-  </div>
-  <div class="alert alert-warning text-center" ng-if="prospects.$resolved && !prospects.length">
-    No hay datos aún, ¿<a ui-sref="prospects.create">Lo creamos</a>?
+    <a ng-repeat="prospect in prospects" ui-sref="prospects.view({prospectId: prospect._id})" class="list-group-item" ng-show="prospect.daysFromBilling >= 14" ng-include="'/modules/prospects/client/views/list.prospect.view.html'"></a>
   </div>
 </section>

@@ -83,15 +83,16 @@ exports.delete = function (req, res) {
  * List of Prospects
  */
 exports.list = function (req, res) {
-  Prospect.find().sort('-created').populate('user', 'displayName').exec(function (err, prospects) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(prospects);
-    }
-  });
+  Prospect.find({ $and: [ { rejected: { $ne: true } } , { bride: { $exists:false } } ] })
+        .sort('-created')
+        .populate('user', 'displayName')
+        .exec(function (err, prospects) {
+          if (err) {
+            return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+          } else {
+            res.json(prospects);
+          }
+        });
 };
 
 /**

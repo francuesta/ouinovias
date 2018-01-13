@@ -259,8 +259,9 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
       for (var i=0; i<$scope.noviasFull.length; i++) {
         var name = $scope.noviasFull[i].name + ' ' + $scope.noviasFull[i].surname;
         name = name.toUpperCase();
+        var city = $scope.noviasFull[i].weddingPlace.toUpperCase();
         var toSearch = $scope.search.toUpperCase();
-        if ($scope.search === '' || name.indexOf(toSearch) !== -1) {
+        if ($scope.search === '' || name.indexOf(toSearch) !== -1 || city.indexOf(toSearch) !== -1) {
           all.push($scope.noviasFull[i]);
         }
       }

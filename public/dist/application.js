@@ -901,8 +901,9 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
       for (var i=0; i<$scope.noviasFull.length; i++) {
         var name = $scope.noviasFull[i].name + ' ' + $scope.noviasFull[i].surname;
         name = name.toUpperCase();
+        var city = $scope.noviasFull[i].weddingPlace.toUpperCase();
         var toSearch = $scope.search.toUpperCase();
-        if ($scope.search === '' || name.indexOf(toSearch) !== -1) {
+        if ($scope.search === '' || name.indexOf(toSearch) !== -1 || city.indexOf(toSearch) !== -1) {
           all.push($scope.noviasFull[i]);
         }
       }
@@ -1481,6 +1482,16 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
   function ($scope, $stateParams, $location, Authentication, Prospects, Novias) {
     $scope.authentication = Authentication;
 
+    var setFlags = function(prospect) {
+      if (prospect.billingDate) {
+        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+        var now = new Date();
+        prospect.daysFromBilling = Math.ceil((now.getTime() - new Date(prospect.billingDate).getTime())/(oneDay));
+      } else {
+        prospect.daysFromBilling = -1;
+      }
+    };
+
     // Create new Prospect
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -1581,8 +1592,9 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
       for (var i=0; i<$scope.prospectsFull.length; i++) {
         var name = $scope.prospectsFull[i].name + ' ' + $scope.prospectsFull[i].surname;
         name = name.toUpperCase();
+        var city = $scope.prospectsFull[i].weddingPlace.toUpperCase();
         var toSearch = $scope.search.toUpperCase();
-        if ($scope.search === '' || name.indexOf(toSearch) !== -1) {
+        if ($scope.search === '' || name.indexOf(toSearch) !== -1 || city.indexOf(toSearch) !== -1) {
           all.push($scope.prospectsFull[i]);
         }
       }
@@ -1655,16 +1667,6 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
-    };
-
-    var setFlags = function(prospect) {
-      if (prospect.billingDate) {
-        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-        var now = new Date();
-        prospect.daysFromBilling = Math.ceil((now.getTime() - new Date(prospect.billingDate).getTime())/(oneDay));
-      } else {
-        prospect.daysFromBilling = -1;
-      }
     };
   }
 ]);

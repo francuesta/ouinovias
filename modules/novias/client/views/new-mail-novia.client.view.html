@@ -1,0 +1,177 @@
+<section ng-controller="NoviasController" ng-init="findOne()">
+  <div class="page-header">
+    <h1><span>Emails de recordatorios</span></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h4>Direcciones</h4>
+      <div class="row">
+        <div class="col-md-3"><strong>Novia</strong></div>
+        <div class="col-md-6" ng-bind="novia.email"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"><strong>Profesional</strong></div>
+        <div class="col-md-6" ng-bind="novia.selectedProfessional.email"></div>
+      </div>
+    </div>
+  </div>
+  <br/><br/>
+  <div class="col-md-8">
+    <h4>Prueba {{novia.name}} - {{novia.testDate | date:"dd/MM/yyyy"}} - {{novia.testPlace}}</h4>
+    <hr/>
+    <div style="text-align: center;">
+        <span>
+            <img src="https://ouinovias.com/wp-content/uploads/logo-oui-1.png" height="77pt" width="154pt"/>
+        </span>
+    </div>
+    <div style="text-align: center;margin-top:-20px">
+        <span>
+            <img src="https://ouinovias.com/wp-content/uploads/imagen-prueba.png" height="332px" width="308px"/>
+        </span>
+    </div>
+    <div style="text-align: center;font-family: Cochin,Helvetica;font-size:14pt;margin-bottom:40px;margin-top:-15px">
+        <span>
+            Buenos días {{novia.name}}, 
+            <br/><br/>
+            ¿Qué tal estás? Espero que todo vaya fenomenal y los preparativos viento en popa.
+            <br/><br/>
+            Te escribo porque al fin llegó tu prueba, y podrás elegir con tu estilista el BRIDE LOOK PERFECTO. 
+            <br/><br/>
+            Te envío el recordatorio de citación  con todos los datos confirmados.
+            <br/><br/>
+            Revisa los datos y confírmame que esta todo correcto.
+        </span>
+    </div>
+    <div style="font-family:Didot,Helvetica;font-size:30pt;margin-left:40px">
+        <span>Prueba de {{novia.name}}</span>
+    </div>
+    <div style="text-align: center;margin-top:30px;margin-bottom:50px;font-family: Alegreya,Helvetica;font-size:14pt;">
+        <table class="table_mail">
+            <tr>
+                <td><strong>TELÉFONO DE {{novia.selectedProfessional.name.toUpperCase()}}</strong></td>
+                <td>{{novia.selectedProfessional.phone}}</td>
+            </tr>
+            <tr>
+                <td><strong>DÍA DE LA PRUEBA</strong></td>
+                <td>{{novia.testDateText}}</td>
+            </tr>
+            <tr>
+                <td><strong>DIRECCIÓN</strong></td>
+                <td><br/>{{novia.testPlace}}<br/><br/></td>
+            </tr>
+            <tr>
+                <td><strong>HORA DE LA CITA</strong></td>
+                <td>{{novia.testHour}}</td>
+            </tr>
+            <tr>
+                <td><strong>SERVICIO</strong></td>
+                <td>
+                    <br/>
+                    <span ng-repeat="service in novia.services">
+                      <span ng-show="service.quantity > 1">{{service.quantity}} </span>{{service.data.name}}<br/>
+                    </span>
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>ABONAR AL ESTILISTA</strong></td>
+                <td>{{novia.testPrice}} €</td>
+            </tr>
+        </table>
+    </div>
+    <div style="text-align: center;font-family: Alegreya,Helvetica;font-size:14pt;">
+        <span>
+            <strong>Nos encantaría que nos llamaras o nos escribas un mail después de la prueba para contarnos qué tal fue todo.
+            <br/><br/>
+            Cualquier cosita que necesites, siempre a tu disposición.
+            <br/><br/>
+            Un abrazo,
+            <br/><br/>
+            </strong>
+        </span>
+        <span style="font-family: Give You Glory,Helvetica">
+            OUI NOVIAS TEAM
+        <span>
+    </div>
+  </div>
+  <div class="col-md-8" style="padding-top:50px">
+    <h4>Boda de {{novia.name}} - {{novia.weddingDate | date:"dd/MM/yyyy"}} - {{novia.weddingPlace}}</h4>
+    <hr/>
+    <div style="text-align: center;">
+        <span>
+            <img src="https://ouinovias.com/wp-content/uploads/logo-oui-1.png" height="77pt" width="154pt"/>
+        </span>
+    </div>
+    <div style="text-align: center;margin-top:-40px">
+        <span>
+            <img src="https://ouinovias.com/wp-content/uploads/imagen-boda.png" height="450pt" width="318pt"/>
+        </span>
+    </div>
+    <div style="text-align: center;font-family: Cochin,Helvetica;font-size:14pt;margin-bottom:40px;margin-top:-35px">
+        <span>
+            Buenos días {{novia.name}}, 
+            <br/><br/>
+            ¿Nerviosa? No te preocupes porque estás en las mejores manos. 
+            <br/><br/>
+            Ya lo tenemos todo organizado a la perfección, así que fuera nervios y a disfrutar tus últimos días de soltera! 
+            <br/><br/>
+            No tengo ninguna duda que todo va a salir genial. 
+            <br/><br/>
+            Te mando el recordatorio de citación para el gran día!! 
+            <br/><br/>
+            Revisa todos los datos y confírmame que esté todo correcto.
+        </span>
+    </div>
+    <div style="font-family:Didot,Helvetica;font-size:30pt;margin-left:40px">
+        <span>Boda de {{novia.name}}</span>
+    </div>
+    <div style="text-align: center;margin-top:30px;margin-bottom:50px;font-family: Alegreya,Helvetica;font-size:14pt;">
+        <table class="table_mail">
+            <tr>
+                <td><strong>TELÉFONO DE {{novia.selectedProfessional.name.toUpperCase()}}</strong></td>
+                <td>{{novia.selectedProfessional.phone}}</td>
+            </tr>
+            <tr>
+                <td><strong>DÍA DEL ENLACE</strong></td>
+                <td>{{novia.weddingDateText}}</td>
+            </tr>
+            <tr>
+                <td><strong>DIRECCIÓN</strong></td>
+                <td><br/>{{novia.weddingPlace}}<br/><br/></td>
+            </tr>
+            <tr>
+                <td><strong>HORA DE LA CITA</strong></td>
+                <td>{{novia.weddingCitation}}</td>
+            </tr>
+            <tr>
+                <td><strong>SERVICIO</strong></td>
+                <td>
+                    <br/>
+                    <span ng-repeat="service in novia.services">
+                      <span ng-show="service.quantity > 1">{{service.quantity}} </span>{{service.data.name}}<br/>
+                    </span>
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>ABONAR AL ESTILISTA</strong></td>
+                <td>{{novia.weddingPrice}} €</td>
+            </tr>
+        </table>
+    </div>
+    <div style="text-align: center;font-family: Alegreya,Helvetica;font-size:14pt;">
+        <span>
+            <strong>Os deseamos un día cargado de amor, felicidad y grandes momentos! 
+            <br/><br/>
+            Muchas gracias por confiar en nosotros! 
+            <br/><br/>
+            Besos y abrazos,
+            <br/><br/>
+            </strong>
+        </span>
+        <span style="font-family: Give You Glory,Helvetica">
+            OUI NOVIAS TEAM
+        <span>
+    </div>
+  </div>
+</section>

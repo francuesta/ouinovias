@@ -35,3 +35,27 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+.table_mail {
+      border-collapse: collapse;
+      margin: 0 auto;
+}
+.table_mail td {
+  border: 1px solid grey;
+  border-style: dashed;
+  padding: 5px 30px 5px 10px;
+}
+.table_mail tr:first-child td {
+  border-top: 0;
+}
+.table_mail tr:last-child td {
+  border-bottom: 0;
+}
+.table_mail tr td:first-child,
+.table_mail tr th:first-child {
+  border-left: 0;
+}
+.table_mail tr td:last-child,
+.table_mail tr th:last-child {
+  border-right: 0;
+}

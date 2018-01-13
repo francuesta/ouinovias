@@ -632,7 +632,7 @@ angular.module('novias').config(['$stateProvider',
       })
       .state('novias.mail', {
         url: '/:noviaId/mail',
-        templateUrl: 'modules/novias/client/views/mail-novia.client.view.html',
+        templateUrl: 'modules/novias/client/views/new-mail-novia.client.view.html',
         data: {
           roles: ['user', 'admin']
         }

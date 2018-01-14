@@ -332,21 +332,38 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
               $scope.prices = resultsPrices;
               // Calculate totals
               var total = 0;
+              var totalReservation = 0;
+              var totalTest = 0;
               for (var z=0; z<$scope.novia.services.length; z++) {
                 var quantity = $scope.novia.services[z].quantity;
                 var tmpSeq = $scope.novia.services[z].seq;
                 var price = 0;
+                var reservation = 0;
+                var test = 0;
                 for (var w=0; w<$scope.novia.selectedPrice.services.length; w++) {
                   if ($scope.novia.selectedPrice.services[w].seq === tmpSeq) {
                     price = $scope.novia.selectedPrice.services[w].price;
+                    if ($scope.novia.selectedPrice.services[w].reservation !== undefined) {
+                      reservation = $scope.novia.selectedPrice.services[w].reservation;
+                    }
+                    if ([1,2,3].includes($scope.novia.selectedPrice.services[w].seq)) {
+                      test = Math.round(($scope.novia.selectedPrice.services[w].price - $scope.novia.selectedPrice.services[w].reservation)/2*100)/100;
+                    }
+                    if ([10,11,12].includes($scope.novia.selectedPrice.services[w].seq)) {
+                      test = ($scope.novia.selectedPrice.services[w].price - $scope.novia.selectedPrice.services[w].reservation);
+                    }
                   }
                 }
                 total = total + (price*quantity);
+                totalReservation = totalReservation + (reservation*quantity);
+                totalTest = totalTest + (test*quantity);
+                $scope.novia.services[z].testPrice = (test*quantity);
+                $scope.novia.services[z].weddingPrice = ((price-reservation-test)*quantity);
               }
               $scope.novia.total = total;
-              $scope.novia.reservation = Math.round(total/3*100)/100;
-              $scope.novia.testPrice = Math.round(total/3*100)/100;
-              $scope.novia.weddingPrice = Math.round(total/3*100)/100;
+              $scope.novia.reservation = totalReservation;
+              $scope.novia.testPrice = totalTest;
+              $scope.novia.weddingPrice = (total-totalReservation-totalTest);
             });
           });
         }

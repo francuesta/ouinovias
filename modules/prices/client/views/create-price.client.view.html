@@ -26,9 +26,13 @@
         </div>
         <div class="form-group" ng-repeat="service in services">
           <label for="prices{{service.seq}}">{{service.name}}</label>
-          <input name="prices{{service.seq}}" type="number" ng-model="service.price" id="price{{service.seq}}" class="form-control" placeholder="{{service.name}}" required>
+          <input name="prices{{service.seq}}" type="number" ng-model="service.price" id="price{{service.seq}}" class="form-control" placeholder="Precio para {{service.name}}" required>
           <div ng-messages="priceForm.year.$error" role="alert">
             <p class="help-block error-text" ng-message="required">El precio es obligatorio.</p>
+          </div>
+          <input name="reservation{{service.seq}}" type="number" ng-model="service.reservation" id="reservation{{service.seq}}" class="form-control" placeholder="Reserva para {{service.name}}" required>
+          <div ng-messages="priceForm.year.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">El precio de reserva es obligatorio.</p>
           </div>
         </div>
         <div class="form-group">

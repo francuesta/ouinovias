@@ -23,7 +23,7 @@ angular.module('prices').controller('PricesController', ['$scope', '$stateParams
       var services = [];
 
       for (var i=0; i<$scope.services.length; i++) {
-        var service = { 'seq': $scope.services[i].seq, 'price': $scope.services[i].price };
+        var service = { 'seq': $scope.services[i].seq, 'price': $scope.services[i].price, 'reservation': $scope.services[i].reservation };
         services.push(service);
       }
 

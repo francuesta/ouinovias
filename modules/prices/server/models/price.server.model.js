@@ -26,7 +26,8 @@ var PriceSchema = new Schema({
   services: [
     {
       seq: Number,
-      price: Number
+      price: Number,
+      reservation: Number
     }
   ],
   user: {

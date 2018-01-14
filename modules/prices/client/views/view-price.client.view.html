@@ -12,7 +12,7 @@
       <div ng-repeat="service in price.services">
         <div class="row">
           <div class="col-md-3"><strong>{{service.name}}</strong></div>
-          <div class="col-md-6" ng-bind="service.price"></div>
+          <div class="col-md-6">Precio: {{service.price}}<br/>Reserva: {{service.reservation}}</div>
         </div>
         <hr/>
       </div>

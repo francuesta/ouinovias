@@ -29,7 +29,7 @@
             <img src="https://ouinovias.com/wp-content/uploads/imagen-prueba.png" height="332px" width="308px"/>
         </span>
     </div>
-    <div style="text-align: center;font-family: Cochin,Helvetica;font-size:14pt;margin-bottom:40px;margin-top:-15px">
+    <div style="text-align: center;font-family: Cochin,Times New Roman;font-size:14pt;margin-bottom:40px;margin-top:-15px">
         <span>
             Buenos días {{novia.name}}, 
             <br/><br/>
@@ -42,10 +42,10 @@
             Revisa los datos y confírmame que esta todo correcto.
         </span>
     </div>
-    <div style="font-family:Didot,Helvetica;font-size:30pt;margin-left:40px">
+    <div style="font-family:Didot,Times New Roman;font-size:30pt;margin-left:40px">
         <span>Prueba de {{novia.name}}</span>
     </div>
-    <div style="text-align: center;margin-top:30px;margin-bottom:50px;font-family: Alegreya,Helvetica;font-size:14pt;">
+    <div style="text-align: center;margin-top:30px;margin-bottom:50px;font-family: Alegreya,Times New Roman;font-size:14pt;">
         <table class="table_mail">
             <tr>
                 <td><strong>TELÉFONO DE {{novia.selectedProfessional.name.toUpperCase()}}</strong></td>
@@ -68,7 +68,10 @@
                 <td>
                     <br/>
                     <span ng-repeat="service in novia.services">
-                      <span ng-show="service.quantity > 1">{{service.quantity}} </span>{{service.data.name}}<br/>
+                        <span ng-show="[1,2,3,10,11,12].indexOf(service.seq) >= 0">
+                            <span ng-show="[1,2,3].indexOf(service.seq) >= 0">PRUEBA</span>
+                            <span ng-show="service.quantity > 1">{{service.quantity}} </span>{{service.data.name}} ({{service.testPrice}} €)<br/>
+                        </span>
                     </span>
                     <br/>
                 </td>
@@ -79,7 +82,7 @@
             </tr>
         </table>
     </div>
-    <div style="text-align: center;font-family: Alegreya,Helvetica;font-size:14pt;">
+    <div style="text-align: center;font-family: Alegreya,Times New Roman;font-size:14pt;">
         <span>
             <strong>Nos encantaría que nos llamaras o nos escribas un mail después de la prueba para contarnos qué tal fue todo.
             <br/><br/>
@@ -89,7 +92,7 @@
             <br/><br/>
             </strong>
         </span>
-        <span style="font-family: Give You Glory,Helvetica">
+        <span style="font-family: Give You Glory,Times New Roman">
             OUI NOVIAS TEAM
         <span>
     </div>
@@ -107,7 +110,7 @@
             <img src="https://ouinovias.com/wp-content/uploads/imagen-boda.png" height="450pt" width="318pt"/>
         </span>
     </div>
-    <div style="text-align: center;font-family: Cochin,Helvetica;font-size:14pt;margin-bottom:40px;margin-top:-35px">
+    <div style="text-align: center;font-family: Cochin,Times New Roman;font-size:14pt;margin-bottom:40px;margin-top:-35px">
         <span>
             Buenos días {{novia.name}}, 
             <br/><br/>
@@ -122,10 +125,10 @@
             Revisa todos los datos y confírmame que esté todo correcto.
         </span>
     </div>
-    <div style="font-family:Didot,Helvetica;font-size:30pt;margin-left:40px">
+    <div style="font-family:Didot,Times New Roman;font-size:30pt;margin-left:40px">
         <span>Boda de {{novia.name}}</span>
     </div>
-    <div style="text-align: center;margin-top:30px;margin-bottom:50px;font-family: Alegreya,Helvetica;font-size:14pt;">
+    <div style="text-align: center;margin-top:30px;margin-bottom:50px;font-family: Alegreya,Times New Roman;font-size:14pt;">
         <table class="table_mail">
             <tr>
                 <td><strong>TELÉFONO DE {{novia.selectedProfessional.name.toUpperCase()}}</strong></td>
@@ -148,18 +151,21 @@
                 <td>
                     <br/>
                     <span ng-repeat="service in novia.services">
-                      <span ng-show="service.quantity > 1">{{service.quantity}} </span>{{service.data.name}}<br/>
+                        <span ng-show="[10,11,12].indexOf(service.seq) < 0">
+                            <span ng-show="service.quantity > 1">{{service.quantity}} </span>{{service.data.name}} ({{service.weddingPrice}} €)<br/>
+                        </span>
                     </span>
+                    <span ng-show="novia.displacement !== undefined && novia.displacement !== 0">DESPLAZAMIENTO ({{novia.displacement}} €)</span><br/>
                     <br/>
                 </td>
             </tr>
             <tr>
                 <td><strong>ABONAR AL ESTILISTA</strong></td>
-                <td>{{novia.weddingPrice}} €</td>
+                <td>{{novia.weddingPrice+novia.displacement}} €</td>
             </tr>
         </table>
     </div>
-    <div style="text-align: center;font-family: Alegreya,Helvetica;font-size:14pt;">
+    <div style="text-align: center;font-family: Alegreya,Times New Roman;font-size:14pt;">
         <span>
             <strong>Os deseamos un día cargado de amor, felicidad y grandes momentos! 
             <br/><br/>
@@ -169,7 +175,7 @@
             <br/><br/>
             </strong>
         </span>
-        <span style="font-family: Give You Glory,Helvetica">
+        <span style="font-family: Give You Glory,Times New Roman">
             OUI NOVIAS TEAM
         <span>
     </div>

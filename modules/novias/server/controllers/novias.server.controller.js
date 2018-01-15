@@ -59,6 +59,7 @@ exports.update = function (req, res) {
   novia.price = req.body.price;
   novia.services = req.body.services;
   novia.displacement = req.body.displacement;
+  novia.testDisplacement = req.body.testDisplacement;
 
   novia.save(function (err) {
     if (err) {

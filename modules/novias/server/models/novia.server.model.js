@@ -109,6 +109,10 @@ var NoviaSchema = new Schema({
     type: Number,
     default: 0
   },
+  testDisplacement: {
+    type: Number,
+    default: 0
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

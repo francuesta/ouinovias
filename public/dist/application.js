@@ -748,7 +748,8 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         professional: this.professional,
         price: this.price,
         services: [{ 'seq':1,'quantity':1 }],
-        displacement: this.displacement
+        displacement: this.displacement,
+        testDisplacement: this.testDisplacement
       });
 
       // Redirect after save
@@ -777,6 +778,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.professional = '';
         $scope.price = '';
         $scope.displacement = '';
+        $scope.testDisplacement = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

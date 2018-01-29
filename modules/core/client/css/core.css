@@ -37,13 +37,16 @@ a:hover .header-profile-image {
 }
 
 .table_mail {
-      border-collapse: collapse;
-      margin: 0 auto;
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Didot,Times New Roman;
+  font-size:14pt;
 }
 .table_mail td {
   border: 1px solid grey;
   border-style: dashed;
   padding: 5px 30px 5px 10px;
+  font-family:Didot,Times New Roman;
 }
 .table_mail tr:first-child td {
   border-top: 0;

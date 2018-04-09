@@ -12,7 +12,15 @@ var path = require('path'),
  * Create a prospect
  */
 exports.create = function (req, res) {
-  var prospect = new Prospect(req.body);
+  var body = req.body;
+  if (Object.keys(req.body).length === 1) {
+    body = JSON.parse(Object.keys(req.body)[0]);
+    if (body.weddingDateFormatted) {
+      var parsedDate = body.weddingDateFormatted.split("/");
+      body.weddingDate = "" + parsedDate[2] + "-" + parsedDate[1] + "-" + parsedDate[0] + "T12:00:00.000Z";
+    }
+  }
+  var prospect = new Prospect(body);
   prospect.user = req.user;
 
   prospect.save(function (err) {

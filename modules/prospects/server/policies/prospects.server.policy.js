@@ -32,7 +32,10 @@ exports.invokeRolesPolicies = function () {
     }]
   }, {
     roles: ['guest'],
-    allows: []
+    allows: [{
+      resources: '/api/prospects',
+      permissions: ['post']
+    }]
   }]);
 };
 
@@ -42,8 +45,7 @@ exports.invokeRolesPolicies = function () {
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an prospect is being processed and the current user created it then allow any manipulation
-  if (req.prospect && req.user && req.prospect.user.id === req.user.id) {
+  if (req.prospect) {
     return next();
   }
 

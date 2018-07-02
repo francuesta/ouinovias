@@ -113,6 +113,11 @@ var NoviaSchema = new Schema({
     type: Number,
     default: 0
   },
+  photos: {
+    type: String,
+    default: '',
+    trim: true
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

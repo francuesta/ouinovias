@@ -24,5 +24,12 @@ angular.module('novias').run(['Menus',
       state: 'novias.create',
       roles: ['user']
     });
+
+    // Add the dropdown create item
+    Menus.addSubMenuItem('topbar', 'novias', {
+      title: 'Ya celebradas',
+      state: 'novias.old',
+      roles: ['user']
+    });
   }
 ]);

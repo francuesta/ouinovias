@@ -60,6 +60,7 @@ exports.update = function (req, res) {
   novia.services = req.body.services;
   novia.displacement = req.body.displacement;
   novia.testDisplacement = req.body.testDisplacement;
+  novia.photos = req.body.photos;
 
   novia.save(function (err) {
     if (err) {
@@ -93,7 +94,12 @@ exports.delete = function (req, res) {
  * List of Novias
  */
 exports.list = function (req, res) {
-  Novia.find().sort('-weddingDate').populate('user', 'displayName').exec(function (err, novias) {
+  var cutoff = new Date();
+  var filter = { 'weddingDate' : { '$gte': cutoff } };
+  if (req.query.old) {
+    filter = { 'weddingDate' : { '$lt': cutoff } };
+  }
+  Novia.find(filter).sort('-weddingDate').populate('user', 'displayName').exec(function (err, novias) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

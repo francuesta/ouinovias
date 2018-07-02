@@ -593,6 +593,13 @@ angular.module('novias').run(['Menus',
       state: 'novias.create',
       roles: ['user']
     });
+
+    // Add the dropdown create item
+    Menus.addSubMenuItem('topbar', 'novias', {
+      title: 'Ya celebradas',
+      state: 'novias.old',
+      roles: ['user']
+    });
   }
 ]);
 
@@ -611,6 +618,13 @@ angular.module('novias').config(['$stateProvider',
       .state('novias.list', {
         url: '',
         templateUrl: 'modules/novias/client/views/list-novias.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
+      .state('novias.old', {
+        url: '/old',
+        templateUrl: 'modules/novias/client/views/list-old-novias.client.view.html',
         data: {
           roles: ['user', 'admin']
         }
@@ -749,7 +763,8 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         price: this.price,
         services: [{ 'seq':1,'quantity':1 }],
         displacement: this.displacement,
-        testDisplacement: this.testDisplacement
+        testDisplacement: this.testDisplacement,
+        photos: this.photos
       });
 
       // Redirect after save
@@ -779,6 +794,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.price = '';
         $scope.displacement = '';
         $scope.testDisplacement = '';
+        $scope.photos = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -887,6 +903,18 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
     // Find a list of Novias
     $scope.find = function () {
       Novias.query({}, function(results) {
+        $scope.noviasFull = results;
+        // Loop over array to search next events
+        for (var i=0; i<$scope.noviasFull.length; i++) {
+          setFlags($scope.noviasFull[i]);
+        }
+        $scope.novias = $scope.noviasFull;
+      });
+    };
+
+    // Find a list of Old Novias
+    $scope.findOld = function () {
+      Novias.query({ 'old':true } , function(results) {
         $scope.noviasFull = results;
         // Loop over array to search next events
         for (var i=0; i<$scope.noviasFull.length; i++) {

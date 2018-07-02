@@ -107,7 +107,8 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         price: this.price,
         services: [{ 'seq':1,'quantity':1 }],
         displacement: this.displacement,
-        testDisplacement: this.testDisplacement
+        testDisplacement: this.testDisplacement,
+        photos: this.photos
       });
 
       // Redirect after save
@@ -137,6 +138,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.price = '';
         $scope.displacement = '';
         $scope.testDisplacement = '';
+        $scope.photos = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -245,6 +247,18 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
     // Find a list of Novias
     $scope.find = function () {
       Novias.query({}, function(results) {
+        $scope.noviasFull = results;
+        // Loop over array to search next events
+        for (var i=0; i<$scope.noviasFull.length; i++) {
+          setFlags($scope.noviasFull[i]);
+        }
+        $scope.novias = $scope.noviasFull;
+      });
+    };
+
+    // Find a list of Old Novias
+    $scope.findOld = function () {
+      Novias.query({ 'old':true } , function(results) {
         $scope.noviasFull = results;
         // Loop over array to search next events
         for (var i=0; i<$scope.noviasFull.length; i++) {

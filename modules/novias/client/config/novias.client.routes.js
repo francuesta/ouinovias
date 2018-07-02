@@ -17,6 +17,13 @@ angular.module('novias').config(['$stateProvider',
           roles: ['user', 'admin']
         }
       })
+      .state('novias.old', {
+        url: '/old',
+        templateUrl: 'modules/novias/client/views/list-old-novias.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      })
       .state('novias.create', {
         url: '/create',
         templateUrl: 'modules/novias/client/views/create-novia.client.view.html',

@@ -129,6 +129,14 @@
             <label for="testDisplacement">Desplazamiento Prueba</label>
             <input name="testDisplacement" type="number" ng-model="novia.testDisplacement" id="testDisplacement" class="form-control" placeholder="Desplazamiento Prueba">
           </div>
+          <div class="form-group">
+            <label for="photos">Fotos</label>
+            <select name="photos" type="select" ng-model="novia.photos" id="photos" class="form-control">
+              <option value="Pedir">Pedir</option>
+              <option value="Pedidas">Pedidas</option>
+              <option value="Publicadas">Publicadas</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
           <input type="submit" value="Actualizar" class="btn btn-default">

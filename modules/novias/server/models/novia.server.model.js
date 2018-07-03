@@ -30,6 +30,11 @@ var NoviaSchema = new Schema({
     default: '',
     trim: true
   },
+  otherPhone: {
+    type: Number,
+    default: '',
+    trim: true
+  },
   email: {
     type: String,
     default: '',

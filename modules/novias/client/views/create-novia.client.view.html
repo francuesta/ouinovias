@@ -27,6 +27,10 @@
           </div>
         </div>
         <div class="form-group" show-errors>
+          <label for="otherPhone">Teléfono Alternativo</label>
+          <input name="otherPhone" type="otherPhone" ng-model="otherPhone" id="otherPhone" class="form-control" placeholder="Teléfono Alternativo">
+        </div>
+        <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input name="email" type="email" ng-model="email" id="email" class="form-control" placeholder="Email" required>
           <div ng-messages="noviaForm.email.$error" role="alert">

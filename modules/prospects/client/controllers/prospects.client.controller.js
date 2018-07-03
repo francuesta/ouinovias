@@ -116,8 +116,9 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
         var name = $scope.prospectsFull[i].name + ' ' + $scope.prospectsFull[i].surname;
         name = name.toUpperCase();
         var city = $scope.prospectsFull[i].weddingPlace.toUpperCase();
+        var email = $scope.prospectsFull[i].email.toUpperCase();
         var toSearch = $scope.search.toUpperCase();
-        if ($scope.search === '' || name.indexOf(toSearch) !== -1 || city.indexOf(toSearch) !== -1) {
+        if ($scope.search === '' || name.indexOf(toSearch) !== -1 || city.indexOf(toSearch) !== -1 || email.indexOf(toSearch) !== -1) {
           all.push($scope.prospectsFull[i]);
         }
       }

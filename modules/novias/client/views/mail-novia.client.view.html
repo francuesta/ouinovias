@@ -22,7 +22,7 @@
       <div class="col-md-9" style="font-family: Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif">
         <strong><u>{{novia.testHour}} PRUEBA DE {{novia.name}} {{novia.surname}}</u></strong>
         <br/><br/>
-        TLF {{novia.name}} - {{novia.phone}}.
+        TLF {{novia.name}} - {{novia.phone}}. <span ng-show="novia.otherPhone !== null">(Alternativo {{novia.otherPhone}})</span>
         <br/> <br/>
         <strong>CITACIÓN</strong>
         <br/><br/>
@@ -67,7 +67,7 @@
         <center>
         <strong><u>{{novia.weddingCitation}} BODA DE {{novia.name}} {{novia.surname}}</u></strong>
         <br/><br/>
-        TLF {{novia.name}} - {{novia.phone}}.
+        TLF {{novia.name}} - {{novia.phone}}. <span ng-show="novia.otherPhone !== null">(Alternativo {{novia.otherPhone}})</span>
         <br/> <br/>
         <strong>CITACIÓN</strong>
         <br/><br/>

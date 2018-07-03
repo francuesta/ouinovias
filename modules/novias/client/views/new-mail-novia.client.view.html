@@ -52,6 +52,14 @@
                 <td><strong>TELÉFONO DE {{novia.name.toUpperCase()}}</strong></td>
                 <td>{{novia.phone}}</td>
             </tr>
+            <tr ng-show="novia.otherPhone !== null">
+                <td><strong>TELÉFONO ALTERNATIVO DE {{novia.name.toUpperCase()}}</strong></td>
+                <td>{{novia.otherPhone}}</td>
+            </tr>
+            <tr>
+                <td><strong>TELÉFONO DE Oui Novias</strong></td>
+                <td>615297823</td>
+            </tr>
             <tr>
                 <td><strong>DÍA DE LA PRUEBA</strong></td>
                 <td>{{novia.testDateText}}</td>
@@ -79,7 +87,7 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>ABONAR AL ESTILISTA</strong></td>
+                <td><strong>ABONAR AL ESTILISTA<br/>** en efectivo **</strong></td>
                 <td>{{novia.testPrice+novia.testDisplacement}} €</td>
             </tr>
         </table>
@@ -137,6 +145,14 @@
                 <td><strong>TELÉFONO DE {{novia.name.toUpperCase()}}</strong></td>
                 <td>{{novia.phone}}</td>
             </tr>
+            <tr ng-show="novia.otherPhone !== null">
+                <td><strong>TELÉFONO ALTERNATIVO DE {{novia.name.toUpperCase()}}</strong></td>
+                <td>{{novia.otherPhone}}</td>
+            </tr>
+            <tr>
+                <td><strong>TELÉFONO DE Oui Novias</strong></td>
+                <td>615297823</td>
+            </tr>
             <tr>
                 <td><strong>DÍA DEL ENLACE</strong></td>
                 <td>{{novia.weddingDateText}}</td>
@@ -163,7 +179,7 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>ABONAR AL ESTILISTA</strong></td>
+                <td><strong>ABONAR AL ESTILISTA<br/>** en efectivo **</strong></td>
                 <td>{{novia.weddingPrice+novia.displacement}} €</td>
             </tr>
         </table>

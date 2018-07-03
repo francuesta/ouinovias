@@ -42,6 +42,7 @@ exports.update = function (req, res) {
   novia.name = req.body.name;
   novia.surname = req.body.surname;
   novia.phone = req.body.phone;
+  novia.otherPhone = req.body.otherPhone;
   novia.email = req.body.email;
   novia.weddingDate = req.body.weddingDate;
   novia.weddingCitation = req.body.weddingCitation;

@@ -90,6 +90,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         name: this.name,
         surname: this.surname,
         phone: this.phone,
+        otherPhone: this.otherPhone,
         email: this.email,
         weddingDate: this.weddingDate,
         weddingHour: this.weddingHour,
@@ -119,6 +120,7 @@ angular.module('novias').controller('NoviasController', ['$scope', '$stateParams
         $scope.name = '';
         $scope.surname = '';
         $scope.phone = '';
+        $scope.otherPhone = '';
         $scope.email = '';
         $scope.weddingDate = '';
         $scope.weddingDateDt = '';

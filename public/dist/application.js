@@ -1943,7 +1943,7 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
     // Find a list of Prospects
     $scope.findYear = function () {
       // Load brides information
-      Brides.query({}, function(results) {
+      Brides.query({ 'all': true }, function(results) {
         $scope.brides = results;
         // Load Services information
         Servicios.query({}, function(results) {
@@ -1956,7 +1956,7 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
     // Find a list of Prospects
     $scope.findProf = function () {
       // Load brides information
-      Brides.query({}, function(results) {
+      Brides.query({ 'all': true }, function(results) {
         $scope.brides = results;
         // Load professionals information
         Professionals.query({},function(results) {

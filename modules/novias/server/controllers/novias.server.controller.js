@@ -99,6 +99,8 @@ exports.list = function (req, res) {
   var filter = { 'weddingDate' : { '$gte': cutoff } };
   if (req.query.old) {
     filter = { 'weddingDate' : { '$lt': cutoff } };
+  } else if (req.query.all) {
+    filter = { };
   }
   Novia.find(filter).sort('-weddingDate').populate('user', 'displayName').exec(function (err, novias) {
     if (err) {

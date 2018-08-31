@@ -92,7 +92,7 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   Prospect.find({ $and: [ { rejected: { $ne: true } } , { bride: { $exists:false } } ] })
-        .sort('billingDate')
+        .sort('-billingDate')
         .sort('-created')
         .populate('user', 'displayName')
         .exec(function (err, prospects) {

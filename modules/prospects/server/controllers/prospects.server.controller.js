@@ -91,7 +91,14 @@ exports.delete = function (req, res) {
  * List of Prospects
  */
 exports.list = function (req, res) {
-  Prospect.find({ $and: [ { rejected: { $ne: true } } , { bride: { $exists:false } } ] })
+  var billingFilter = { billingDate: { $exists: true } };
+  var billingSort = '+billingDate';
+  if (req.query.onlyInProgress) {
+    billingFilter = { billingDate: { $exists: false } };
+    billingSort = 'billingDate';
+  }
+  Prospect.find({ $and: [ { rejected: { $ne: true } } , { bride: { $exists:false } } , billingFilter ] })
+        .sort(billingSort)
         .sort('-created')
         .populate('user', 'displayName')
         .exec(function (err, prospects) {

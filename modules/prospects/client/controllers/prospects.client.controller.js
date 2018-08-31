@@ -98,13 +98,15 @@ angular.module('prospects').controller('ProspectsController', ['$scope', '$state
 
     // Find a list of Prospects
     $scope.find = function () {
-      Prospects.query({}, function(results) {
-        $scope.prospectsFull = results;
-        // Loop over array to search next events
-        for (var i=0; i<$scope.prospectsFull.length; i++) {
-          setFlags($scope.prospectsFull[i]);
-        }
-        $scope.prospects = $scope.prospectsFull;
+      Prospects.query({ onlyInProgress: true }, function(results) {
+        Prospects.query({}, function(resultsWithBilling) {
+          $scope.prospectsFull = results.concat(resultsWithBilling);
+          // Loop over array to search next events
+          for (var i=0; i<$scope.prospectsFull.length; i++) {
+            setFlags($scope.prospectsFull[i]);
+          }
+          $scope.prospects = $scope.prospectsFull;
+        });
       });
     };
 
